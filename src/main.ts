@@ -1,5 +1,3 @@
-// main.ts
-
 import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { PrismaService } from "nestjs-prisma";
@@ -37,7 +35,6 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  // Iniciar la aplicación
   await app.listen(process.env.PORT || 3000);
 
   console.log(`App running: http://localhost:${process.env.PORT || 3000}`);

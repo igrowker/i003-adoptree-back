@@ -13,7 +13,9 @@
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false, // Para evitar errores de inicialización
+    "noImplicitAny": false // Opcional, para desactivar advertencias por tipos implícitos
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
