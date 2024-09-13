@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Injectable, Post } from "@nestjs/common";
+import { Body, Controller, forwardRef, Inject, Injectable, Post } from "@nestjs/common";
 import { ConfigType } from "@nestjs/config";
 import { AppConfig } from "../app/app.config";
 import { AuthService } from "./auth.service";
@@ -11,8 +11,6 @@ import { RegisterDto } from "./dto/register.dto";
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    @Inject(AppConfig.KEY)
-    private readonly appConfig: ConfigType<typeof AppConfig>
   ) {}
 
   @Post("register")
