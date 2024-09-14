@@ -16,14 +16,36 @@ model User {
   role           RoleEnum
   arbolId        Int?
   password       String
+  arbol          Arbol[]
 }
 
 model Arbol {
   id         Int            @id @default(autoincrement())
-  tipo       String
+  type       String
   statusTree StatusTreeEnum
-  fincaId    Int
+  finca      Finca          @relation(fields: [fincaId], references: [id])
+  fincaId    Int            @default(1)
+  user       User           @relation(fields: [userId], references: [id])
   userId     Int
+  active     Boolean?       @default(true)
+  cosecha    Cosecha[]
+}
+
+model Finca {
+  id                   Int     @id @default(autoincrement())
+  nombre               String
+  ubicacion            String
+  practicasSostenibles String
+  Arbol                Arbol[]
+}
+
+model Cosecha {
+  id            Int               @id @default(autoincrement())
+  arbolId       Int
+  arbol         Arbol             @relation(fields: [arbolId], references: [id])
+  cantidad      Int
+  fechaDeEnvio  DateTime
+  estadoDeEnvio EstadoDeEnvioEnum
 }
 
 enum RoleEnum {
@@ -41,4 +63,10 @@ enum StatusTreeEnum {
   ARBOL_VIEJO
   ARBOL_SECO
   ARBOL_MUERTO
+}
+
+enum EstadoDeEnvioEnum {
+  DESPACHADO
+  EN_CAMINO
+  ENTREGADO
 }
