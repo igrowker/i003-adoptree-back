@@ -10,7 +10,7 @@ import { RoleEnum } from "@prisma/client";
 import { Request } from "express";
 import { ERROR_KEYS } from "../../../constants";
 import COMMON_KEYS from "../../../constants/keys";
-import { getReqResFromCtx } from "../../utils";
+import { getReqResFromCtx } from "../../../utils";
 import { AuthPayloadDTO } from "../dto/auth-payload.dto";
 
 @Injectable()

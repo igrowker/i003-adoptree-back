@@ -1,14 +1,13 @@
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { UsersModule } from "../users/users.module";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { PasswordService } from "./password.service";
-import { GoogleStrategy } from "./strategies";
 
 @Module({
   imports: [
-    UsersModule,
+    forwardRef(() => UsersModule),
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
@@ -16,7 +15,7 @@ import { GoogleStrategy } from "./strategies";
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, GoogleStrategy, PasswordService],
-  exports: [AuthService],
+  providers: [AuthService, PasswordService],
+  exports: [],
 })
 export class AuthModule {}

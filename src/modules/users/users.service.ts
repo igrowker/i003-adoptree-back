@@ -1,15 +1,21 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { User } from "@prisma/client";
-import { UpdateUserDto } from "../auth /dto/update-profile.dto";
-import { PasswordService } from "../auth /password.service";
+import { UpdateUserDto } from "../auth/dto/update-profile.dto";
+import { PasswordService } from "../auth/password.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UsersRepository } from "./users.repository";
 
 @Injectable()
 export class UsersService {
   constructor(
-    private readonly usersRepo: UsersRepository,
-    private readonly passwordService: PasswordService
+    @Inject(forwardRef(() => PasswordService))
+    private readonly passwordService: PasswordService,
+    private readonly usersRepo: UsersRepository
   ) {}
 
   async findOneByEmail(email: string): Promise<User> {

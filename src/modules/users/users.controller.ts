@@ -8,7 +8,7 @@ import {
   Put,
 } from "@nestjs/common";
 import { RoleEnum } from "@prisma/client";
-import { UpdateUserDto } from "../auth /dto/update-profile.dto";
+import { UpdateUserDto } from "../auth/dto/update-profile.dto";
 import { CreateUserDto } from "./dto/create-user.dto"; // Ajusta la ruta según tu estructura
 import { UsersService } from "./users.service";
 

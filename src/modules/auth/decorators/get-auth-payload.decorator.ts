@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
 import { get as _get } from "lodash";
-import { getReqResFromCtx } from "../../utils";
+import { getReqResFromCtx } from "../../../utils";
 import { AuthPayloadDTO } from "../dto/auth-payload.dto";
 
 type DotPrefix<T extends string> = T extends "" ? "" : `.${T}`;
