@@ -19,8 +19,11 @@ model User {
 }
 
 model Arbol {
-  id   Int    @id @default(autoincrement())
-  tipo String
+  id         Int            @id @default(autoincrement())
+  tipo       String
+  statusTree StatusTreeEnum
+  fincaId    Int
+  userId     Int
 }
 
 enum RoleEnum {
@@ -29,7 +32,7 @@ enum RoleEnum {
 }
 
 //These states are in increasing order
-enum StatusTree {
+enum StatusTreeEnum {
   SEMILLA
   PLANTULA
   ARBOLITO
