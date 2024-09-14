@@ -18,7 +18,24 @@ model User {
   password       String
 }
 
+model Arbol {
+  id   Int    @id @default(autoincrement())
+  tipo String
+}
+
 enum RoleEnum {
   ADMIN
   USER
+}
+
+//These states are in increasing order
+enum StatusTree {
+  SEMILLA
+  PLANTULA
+  ARBOLITO
+  ARBOL_JOVEN
+  ARBOL_MADURO
+  ARBOL_VIEJO
+  ARBOL_SECO
+  ARBOL_MUERTO
 }
