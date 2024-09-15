@@ -23,7 +23,7 @@ model Arbol {
   id         Int            @id @default(autoincrement())
   type       String
   statusTree StatusTreeEnum
-  finca      Finca          @relation(fields: [fincaId], references: [id])
+  finca      Finca          @relation(fields: [fincaId], references: [id], onDelete: Cascade)
   fincaId    Int            @default(1)
   user       User           @relation(fields: [userId], references: [id])
   userId     Int
@@ -33,10 +33,10 @@ model Arbol {
 
 model Finca {
   id                   Int     @id @default(autoincrement())
-  nombre               String
-  ubicacion            String
-  practicasSostenibles String
-  Arbol                Arbol[]
+  name                 String
+  ubication            String
+  practicesSustainable String
+  arbol                Arbol[]
 }
 
 model Cosecha {

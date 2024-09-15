@@ -4,6 +4,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ArbolModule } from "./modules/arbol/arbol.module";
 import { AuthModule } from "./modules/auth/auth.module";
+import { FincaModule } from "./modules/finca/finca.module";
 import { UsersModule } from "./modules/users/users.module";
 
 @Module({
@@ -19,6 +20,7 @@ import { UsersModule } from "./modules/users/users.module";
     UsersModule,
     AuthModule,
     ArbolModule,
+    FincaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
