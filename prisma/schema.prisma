@@ -8,7 +8,65 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  name           String
+  surname        String
+  direccionEnvio String
+  role           RoleEnum
+  arbolId        Int?
+  password       String
+  arbol          Arbol[]
+}
+
+model Arbol {
+  id         Int            @id @default(autoincrement())
+  type       String
+  statusTree StatusTreeEnum
+  finca      Finca          @relation(fields: [fincaId], references: [id], onDelete: Cascade)
+  fincaId    Int            @default(1)
+  user       User           @relation(fields: [userId], references: [id])
+  userId     Int
+  active     Boolean?       @default(true)
+  cosecha    Cosecha[]
+}
+
+model Finca {
+  id                   Int     @id @default(autoincrement())
+  name                 String
+  ubication            String
+  practicesSustainable String
+  arbol                Arbol[]
+}
+
+model Cosecha {
+  id            Int               @id @default(autoincrement())
+  arbolId       Int
+  arbol         Arbol             @relation(fields: [arbolId], references: [id])
+  cantidad      Int
+  fechaDeEnvio  DateTime
+  estadoDeEnvio EstadoDeEnvioEnum
+}
+
+enum RoleEnum {
+  ADMIN
+  USER
+}
+
+//These states are in increasing order
+enum StatusTreeEnum {
+  SEMILLA
+  PLANTULA
+  ARBOLITO
+  ARBOL_JOVEN
+  ARBOL_MADURO
+  ARBOL_VIEJO
+  ARBOL_SECO
+  ARBOL_MUERTO
+}
+
+enum EstadoDeEnvioEnum {
+  DESPACHADO
+  EN_CAMINO
+  ENTREGADO
 }
