@@ -1,3 +1,8 @@
+[![Deploy to Dev](https://github.com/igrowker/i003-adoptree-back/actions/workflows/devdeploy.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/devdeploy.yml)
+[![Build On Push](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build-on-push.yml)
+[![Build](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build.yml)
+[![Lint](https://github.com/igrowker/i003-adoptree-back/actions/workflows/lint.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/lint.yml)
+
 # Pipeline de CI para Build y Lint
 
 ## Descripción
