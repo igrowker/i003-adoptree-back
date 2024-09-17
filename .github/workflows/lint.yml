@@ -1,0 +1,60 @@
+name: Lint
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - develop
+
+permissions: {}
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Create issue if lint fails
+        if: failure()
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          ACTION_TYPE: 'Lint'
+          URL_ACTION_RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          BRANCH: ${{ github.ref }}
+        with:
+          assignees: ${{ github.event.sender.login }}
+      - name: Comment on PR if failed
+        if: failure()
+        uses: unsplash/comment-on-pr@v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          msg: 'Falló la verificación del Lint :dissapointed:. Por favor revisa los errores y toma las medidas necesarias. Action Run: [Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
+      - name: Comment on PR
+        uses: unsplash/comment-on-pr@v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          msg: 'El linter ha verificado el código :+1: :thumbsup:.'
