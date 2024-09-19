@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Arbol } from "@prisma/client";
-import { ArbolRepository } from "./arbol.repository";
+import { ArbolRepository, EstadoArbol } from "./arbol.repository";
 import { CreateArbolDto } from "./dto/create-arbol.dto";
 import { ArbolFilterDto } from "./dto/filter-arbol.dto";
 import { UpdateArbolDto } from "./dto/update-arbol";
@@ -33,4 +33,12 @@ export class ArbolService {
   async remove(id: number): Promise<Arbol> {
     return this.arbolRepository.remove(id);
   }
+
+  async findStatusTreeById(id: number): Promise<{
+    id: number,
+    statusTree: String
+  } | null> {
+    return this.arbolRepository.findStatusTreeById(id);
+  }
+
 }

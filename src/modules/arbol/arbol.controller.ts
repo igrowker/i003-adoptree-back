@@ -49,4 +49,10 @@ export class ArbolController {
   async remove(@Param("id") id: number): Promise<Arbol> {
     return this.arbolService.remove(Number(id));
   }
+
+  //Obtener estado de un arbol por id
+  @Get("estado-arbol/:id")
+  async findStatusTreeById(@Param("id") id: string): Promise<{id: number, statusTree: String } | null> {
+    return this.arbolService.findStatusTreeById(Number(id));
+  }
 }

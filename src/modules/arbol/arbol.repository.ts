@@ -24,6 +24,12 @@ export type ArbolRepo = Prisma.ArbolGetPayload<{
   };
 }>;
 
+//Intente hacerlo con este export de typo, pero habria que importarlo en el servicio y controlador. Nose si sera bueno.
+export type EstadoArbol = {
+  id: number,
+  statusTree: StatusTreeEnum
+}
+
 interface ArbolCreateRepoInput {
   type: string;
   fincaId: number;
@@ -138,5 +144,17 @@ export class ArbolRepository {
 
   remove(id: number): Promise<Arbol> {
     return this.prisma.arbol.delete({ where: { id: id } });
+  }
+
+  findStatusTreeById(id: number): Promise<{id: number, statusTree: String } | null> {
+     return this.prisma.arbol.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        statusTree: true,
+      },
+    });
   }
 }
