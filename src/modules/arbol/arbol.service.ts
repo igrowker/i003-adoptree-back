@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { Arbol } from "@prisma/client";
 import { ArbolRepository, EstadoArbol } from "./arbol.repository";
 import { CreateArbolDto } from "./dto/create-arbol.dto";
 import { ArbolFilterDto } from "./dto/filter-arbol.dto";
 import { UpdateArbolDto } from "./dto/update-arbol";
+import { ERROR_KEYS } from "../../constants";
 
 @Injectable()
 export class ArbolService {
@@ -34,11 +35,13 @@ export class ArbolService {
     return this.arbolRepository.remove(id);
   }
 
-  async findStatusTreeById(id: number): Promise<{
-    id: number,
-    statusTree: String
-  } | null> {
-    return this.arbolRepository.findStatusTreeById(id);
+  async findStatusTreeById(id: number): Promise<{id: number, statusTree: String}> {
+    const statusTree = await this.arbolRepository.findStatusTreeById(id);
+    console.log(statusTree)
+    if (!statusTree) {
+      throw new NotFoundException(ERROR_KEYS.PRUEBA_TREE_NOT_FOUND)
+    } 
+    return statusTree;
   }
 
 }
