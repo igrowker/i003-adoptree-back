@@ -1,5 +1,5 @@
 import { EstadoDeEnvioEnum } from "@prisma/client";
-import { IsDate, IsEnum, IsNumber } from "class-validator";
+import { IsDate, IsEnum, IsNumber, IsDateString } from "class-validator";
 import { Type } from "class-transformer";
 
 export class CreateCosechaDto {
@@ -9,8 +9,7 @@ export class CreateCosechaDto {
   @IsNumber()
   cantidad: number;
 
-  @Type(() => Date)
-  @IsDate()
+  @IsDateString()
   fechaDeEnvio: Date;
 
   @IsEnum(EstadoDeEnvioEnum)
