@@ -44,7 +44,7 @@ model Cosecha {
   arbolId       Int
   arbol         Arbol             @relation(fields: [arbolId], references: [id])
   cantidad      Int
-  fechaDeEnvio  DateTime
+  fechaDeEnvio  Date
   estadoDeEnvio EstadoDeEnvioEnum
 }
 
