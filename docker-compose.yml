@@ -1,0 +1,92 @@
+services:
+    nginx-proxy:
+        image: 'jc21/nginx-proxy-manager:latest'
+        restart: unless-stopped
+        ports:
+          - '80:80'
+          - '81:81'
+          - '443:443'
+        volumes:
+          - ./data:/data
+          - ./letsencrypt:/etc/letsencrypt
+        networks:
+          - adoptree
+
+    prometheus:
+        image: prom/prometheus:latest
+        restart: unless-stopped
+        volumes:
+          - ./prometheus.yml:/etc/prometheus/prometheus.yml
+          - prometheus_data:/prometheus
+        depends_on:
+          - adoptree-api
+        networks:
+          - adoptree
+        expose:
+          - "9090"
+
+    grafana:
+        image: grafana/grafana:latest
+        restart: unless-stopped
+        volumes:      
+          - grafana_data:/var/lib/grafana
+          - ./grafana.ini:/etc/grafana/grafana.ini
+        networks:
+          - adoptree
+        expose:
+          - "3000"
+
+    loki:
+        image: grafana/loki:2.9.2
+        restart: unless-stopped
+        expose:
+          - "3100"
+        volumes:
+          - ./loki-config.yml:/etc/loki/config.yaml
+        depends_on:
+          - adoptree-api
+        networks:
+          - adoptree
+
+    promtail:
+        image: grafana/promtail:2.7.1
+        restart: unless-stopped
+        volumes:
+          - /var/log:/var/log
+          - /var/run/docker.sock:/var/run/docker.sock
+          - ./promtail-config.yml:/etc/promtail/config.yml
+        depends_on:
+          - loki
+        networks:
+          - adoptree
+
+    cadvisor:
+        image: gcr.io/cadvisor/cadvisor
+        restart: unless-stopped
+        volumes:
+            - "/:/rootfs:ro"
+            - "/var/run:/var/run:ro"
+            - "/sys:/sys:ro"
+            - "/var/lib/docker/:/var/lib/docker:ro"
+            - "/dev/disk/:/dev/disk:ro"
+        expose:
+          - "8080"
+        networks:
+          - adoptree
+
+    adoptree-api:
+        image: emacuello/i003-adoptree-back:latest
+        env_file:
+          - ./.env
+        expose:
+          - "3001"
+        networks:
+            - adoptree
+        restart: unless-stopped
+
+networks:
+    adoptree:
+        driver: bridge
+volumes:
+    prometheus-data:
+    grafana-data:
