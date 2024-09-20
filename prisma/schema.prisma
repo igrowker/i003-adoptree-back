@@ -8,8 +8,8 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
-  email          String   @unique
+  id             Int        @id @default(autoincrement())
+  email          String     @unique
   name           String
   surname        String
   direccionEnvio String
@@ -17,6 +17,7 @@ model User {
   arbolId        Int?
   password       String
   arbol          Arbol[]
+  Adoption       Adoption[]
 }
 
 model Arbol {
@@ -29,6 +30,7 @@ model Arbol {
   userId     Int
   active     Boolean?       @default(true)
   cosecha    Cosecha[]
+  Adoption   Adoption[]
 }
 
 model Finca {
@@ -69,4 +71,13 @@ enum EstadoDeEnvioEnum {
   DESPACHADO
   EN_CAMINO
   ENTREGADO
+}
+
+model Adoption {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+  treeId       Int
+  tree         Arbol    @relation(fields: [treeId], references: [id])
+  purchaseDate DateTime
 }

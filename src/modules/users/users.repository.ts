@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Prisma, User } from "@prisma/client"; // Importa los tipos necesarios de Prisma
+import { Adoption, Prisma, User } from "@prisma/client"; // Importa los tipos necesarios de Prisma
 import { PrismaService } from "nestjs-prisma"; // Asegúrate de que PrismaService esté bien importado
 
 export interface UpdateUserInput {
@@ -33,5 +33,14 @@ export class UsersRepository {
 
   remove(id: number): Promise<User> {
     return this.prisma.user.delete({ where: { id } });
+  }
+  async buyTreeUser(userId: number, treeId: number): Promise<Adoption> {
+    return this.prisma.adoption.create({
+      data: {
+        userId,
+        treeId,
+        purchaseDate: new Date(),
+      },
+    });
   }
 }

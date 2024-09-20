@@ -54,4 +54,7 @@ export class UsersService {
     }
     await this.usersRepo.remove(id);
   }
+  async buyOneTree(userId: number, treeId: number): Promise<void> {
+    await this.usersRepo.buyTreeUser(userId, treeId);
+  }
 }
