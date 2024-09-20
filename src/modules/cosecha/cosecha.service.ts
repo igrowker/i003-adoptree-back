@@ -14,9 +14,15 @@ export class CosechaService {
   }
 
   findAll(filter?: FilterCosechaDto): Promise<Cosecha[]> {
-    return this.cosechaRepository.findAll(filter);
+    // Creamos el objeto where solo con los campos definidos
+    const where: any = {};
+  
+    if (filter?.arbolId !== undefined) {
+      where.arbolId = Number(filter.arbolId);
+    }
+    return this.cosechaRepository.findAll(where);
   }
-
+  
   findOne(id: number): Promise<Cosecha | null> {
     return this.cosechaRepository.findOne(id);
   }
