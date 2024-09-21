@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Injectable,
   Param,
   Post,
@@ -14,6 +15,7 @@ import { CreateUserDto } from "./dto/create-user.dto"; // Ajusta la ruta según 
 import { UsersService } from "./users.service";
 import { GetAuthPayload } from "../auth/decorators";
 import { AuthGuard } from "@nestjs/passport";
+import { get } from "http";
 
 @Injectable()
 @Controller("users")
@@ -35,12 +37,12 @@ export class UsersController {
   deleteUser(@Param("id") id: number) {
     return this.userService.remove(Number(id));
   }
-
   
   @Post('adoptar-arbol/:treeId')
   //@UseGuards(AuthGuard("secret"))
   async buyTree(@GetAuthPayload() authPayload: any,@Body('userId') userId: number, @Param('treeId') treeId: number) {
-    //await this.userService.buyOneTree(userId, treeId);
-    return { message: 'Tree adoption is successfully!'+`${userId}, ${treeId},${authPayload}` };
+    await this.userService.buyOneTree(userId, treeId);
+    return { message: 'La adopcion fue exitosa!'};
   }
 }
+

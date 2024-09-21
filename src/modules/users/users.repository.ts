@@ -35,6 +35,7 @@ export class UsersRepository {
     return this.prisma.user.delete({ where: { id } });
   }
   async buyTreeUser(userId: number, treeId: number): Promise<Adoption> {
+    treeId = parseInt(treeId+'')
     return this.prisma.adoption.create({
       data: {
         userId,
