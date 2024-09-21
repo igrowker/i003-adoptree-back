@@ -38,8 +38,8 @@ export class UsersController {
 
   
   @Post('adoptar-arbol/:treeId')
-  @UseGuards(AuthGuard("secret"))
-  async buyTree(@GetAuthPayload("id") authPayload: any,@Body('userId') userId: number, @Param('treeId') treeId: number) {
+  //@UseGuards(AuthGuard("secret"))
+  async buyTree(@GetAuthPayload() authPayload: any,@Body('userId') userId: number, @Param('treeId') treeId: number) {
     //await this.userService.buyOneTree(userId, treeId);
     return { message: 'Tree adoption is successfully!'+`${userId}, ${treeId},${authPayload}` };
   }
