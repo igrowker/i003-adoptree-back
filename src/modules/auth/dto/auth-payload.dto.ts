@@ -11,6 +11,7 @@ export class AuthPayloadDTO {
   token: string;
   direccionEnvio?: string;
   arbolId: number | null;
+  googleId?: string;
 
   @IsEnum(RoleEnum)
   role: RoleEnum;

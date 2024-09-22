@@ -16,6 +16,8 @@ model User {
   role           RoleEnum
   arbolId        Int?
   password       String
+  googleId       String?
+  avatar         String?
   arbol          Arbol[]
 }
 

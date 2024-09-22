@@ -1,5 +1,7 @@
-import * as Joi from '@hapi/joi';
+import * as Joi from "joi";
 import { registerAs } from '@nestjs/config';
+
+export const AUTH_CONFIG_KEY = 'auth';
 
 export const AuthEnvSchema = {
   JWT_SECRET: Joi.string().required(),
@@ -8,7 +10,7 @@ export const AuthEnvSchema = {
   GOOGLE_CALLBACK_URL: Joi.string().required(),
 };
 
-export const AuthConfig = registerAs('auth', () => ({
+export const AuthConfig = registerAs(AUTH_CONFIG_KEY, () => ({
   google: {
     clientId: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,

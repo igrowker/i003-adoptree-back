@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { IsEmail, IsString, MinLength } from "class-validator";
+import { IsEmail, IsOptional, IsString, MinLength } from "class-validator";
 
 export class UpdateUserDto {
   @Transform(({ value }) => value.trim())
@@ -19,5 +19,8 @@ export class UpdateUserDto {
   @MinLength(6)
   password?: string;
 
-  avatar: any;
+  googleId?: string;
+
+  @IsOptional()
+  avatar?: any;
 }

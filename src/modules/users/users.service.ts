@@ -35,7 +35,7 @@ export class UsersService {
       email: input.email,
       password: hashedPassword,
       direccionEnvio: input.direccionEnvio,
-      role: input.role,
+      role: 'USER',
     });
   }
 

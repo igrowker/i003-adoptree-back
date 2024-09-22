@@ -23,6 +23,8 @@ export class RegisterDto {
   @IsString()
   direccionEnvio: string;
 
+  googleId?: string;
+
   @IsEnum(RoleEnum)
   role: RoleEnum;
   avatar: any;
