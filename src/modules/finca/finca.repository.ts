@@ -39,7 +39,7 @@ interface FincaFilterRepoInput {
 export class FincaRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  private readonly commonIncludes = {
+  public readonly commonIncludes = {
     arbol: {
       select: {
         active: true,
