@@ -6,18 +6,19 @@ import { AppModule } from "./app.module";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // log query events
+  // Log query events
   if (process.env.DB_LOGS === "true") {
     const prismaService: PrismaService = app.get(PrismaService);
     prismaService.$on("query", (e) => {
       let queryString = e.query;
 
-      const params: any[] = JSON.parse(e.params);
+      // Cambiar `any[]` a `unknown[]` y manejar el tipo de manera más segura
+      const params: unknown[] = JSON.parse(e.params);
 
-      params.forEach((param: any, index: number) => {
+      params.forEach((param, index) => {
         queryString = queryString.replace(
           `$${index + 1}`,
-          typeof param === "string" ? `'${param}'` : param
+          typeof param === "string" ? `'${param}'` : String(param) // Asegurarse de convertir a string
         );
       });
 

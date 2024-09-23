@@ -52,7 +52,7 @@ export class ArbolController {
 
   //Obtener estado de un arbol por id
   @Get("estado-arbol/:id")
-  async findStatusTreeById(@Param("id") id: string): Promise<{id: number, statusTree: String } | null> {
+  async findStatusTreeById(@Param("id") id: string): Promise<{id: number, statusTree: string } | null> {
     return this.arbolService.findStatusTreeById(Number(id));
   }
 }
