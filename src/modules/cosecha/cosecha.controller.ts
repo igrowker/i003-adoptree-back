@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
   Query,
@@ -25,11 +26,12 @@ export class CosechaController {
 
   @Get()
   findAll(@Query() filter?: FilterCosechaDto): Promise<Cosecha[]> {
+    
     return this.cosechaService.findAll(filter);
   }
 
   @Get(":id")
-  findOne(@Param("id") id: number): Promise<Cosecha | null> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Cosecha | null> {
     return this.cosechaService.findOne(id);
   }
 
