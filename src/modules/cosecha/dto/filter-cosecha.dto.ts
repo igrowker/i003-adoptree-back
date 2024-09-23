@@ -1,9 +1,13 @@
-import { IsOptional, IsNumber } from 'class-validator';
-import { Type } from 'class-transformer';
+import { EstadoDeEnvioEnum } from "@prisma/client";
+import { Type } from "class-transformer";
+import { IsEnum, IsNumber, IsOptional } from "class-validator";
 
 export class FilterCosechaDto {
   @IsOptional()
   @IsNumber()
   @Type(() => Number)
   arbolId?: number;
+
+  @IsEnum(EstadoDeEnvioEnum)
+  estadoDeEnvio?: EstadoDeEnvioEnum;
 }
