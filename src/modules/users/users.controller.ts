@@ -8,8 +8,9 @@ import {
   Put,
 } from "@nestjs/common";
 import { RoleEnum } from "@prisma/client";
+import { CheckRoles, GetAuthPayload } from "../auth/decorators";
 import { UpdateUserDto } from "../auth/dto/update-profile.dto";
-import { CreateUserDto } from "./dto/create-user.dto"; // Ajusta la ruta según tu estructura
+import { CreateUserDto } from "./dto/create-user.dto";
 import { UsersService } from "./users.service";
 
 @Injectable()
@@ -18,8 +19,8 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Post()
+  @CheckRoles(RoleEnum.USER)
   createUser(@Body() createUserDto: CreateUserDto) {
-    const role: RoleEnum = RoleEnum.USER;
     return this.userService.create(createUserDto);
   }
 
@@ -31,5 +32,15 @@ export class UsersController {
   @Delete(":id")
   deleteUser(@Param("id") id: number) {
     return this.userService.remove(Number(id));
+  }
+
+  @Post("adoptar-arbol/:treeId")
+  //@UseGuards(AuthGuard("secret"))
+  async buyTree(
+    @GetAuthPayload("id") userId: number,
+    @Param("treeId") treeId: number
+  ) {
+    await this.userService.buyOneTree(userId, treeId);
+    return { message: "La adopcion fue exitosa!" };
   }
 }

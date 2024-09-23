@@ -23,7 +23,7 @@ export const GetAuthPayload = createParamDecorator(
   (
     authUserKey: AuthUserKeys,
     context: ExecutionContext
-  ): AuthPayloadDTO | any => {
+  ): AuthPayloadDTO | null => {
     const { req } = getReqResFromCtx(context);
 
     const authUser: AuthPayloadDTO = req.user;

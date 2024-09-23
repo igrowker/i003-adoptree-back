@@ -1,9 +1,9 @@
-import { BadRequestException, forwardRef, Inject, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import { ERROR_KEYS } from "../../constants";
 import { UsersService } from "../users/users.service";
-import { AuthPayloadDTO, LoginResponse } from "./dto/auth-payload.dto";
+import { LoginResponse } from "./dto/auth-payload.dto";
 import { LoginDto } from "./dto/login.dto";
 import { RegisterDto } from "./dto/register.dto";
 import { UpdateUserDto } from "./dto/update-profile.dto";
@@ -45,7 +45,6 @@ export class AuthService {
 
     return this.createToken(user);
   }
-  
 
   async createToken(user: User): Promise<LoginResponse> {
     const token = await this.jwtService.signAsync({

@@ -23,5 +23,5 @@ export class RegisterDto {
 
   @IsEnum(RoleEnum)
   role: RoleEnum;
-  avatar: any;
+  avatar: "" | null;
 }

@@ -1,6 +1,6 @@
 // src/modules/users/dto/create-user.dto.ts
 
-import { IsEmail, IsString, IsOptional } from 'class-validator';
+import { IsEmail, IsOptional, IsString } from "class-validator";
 
 export class CreateUserDto {
   @IsEmail()
@@ -23,5 +23,5 @@ export class CreateUserDto {
   googleId?: string;
 
   @IsOptional()
-  avatar?: any;
+  avatar?: "" | null;
 }

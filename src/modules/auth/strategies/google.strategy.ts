@@ -43,12 +43,16 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
     accessToken: string,
     refreshToken: string,
     profile: Profile
-  ): Promise<any> {
-    const { name, emails, photos } = profile;
+  ) {
+    const {
+      name,
+      emails,
+      //  photos
+    } = profile;
 
-    const stateData = req.query.state
-      ? JSON.parse(req.query.state.toString())
-      : {};
+    // const stateData = req.query.state
+    //   ? JSON.parse(req.query.state.toString())
+    //   : {};
 
     try {
       let user = await this.usersService.findOneByEmail(emails[0].value);

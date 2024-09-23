@@ -1,8 +1,18 @@
-// src/modules/auth/google-auth.service.ts
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from "@nestjs/common";
+import { OAuth2Client } from "google-auth-library";
+import { UsersService } from "../users/users.service";
 
-import { Injectable, Inject, UnauthorizedException, NotFoundException } from '@nestjs/common';
-import { OAuth2Client } from 'google-auth-library';
-import { UsersService } from '../users/users.service';
+// Definición de la interfaz para la configuración de autenticación
+interface AuthConfig {
+  google: {
+    clientId: string;
+  };
+}
 
 @Injectable()
 export class GoogleAuthService {
@@ -10,7 +20,7 @@ export class GoogleAuthService {
 
   constructor(
     private usersService: UsersService,
-    @Inject('AUTH_CONFIG') private authConfig: any
+    @Inject("AUTH_CONFIG") private authConfig: AuthConfig
   ) {
     this.client = new OAuth2Client(this.authConfig.google.clientId);
   }
@@ -26,14 +36,14 @@ export class GoogleAuthService {
       const payload = ticket.getPayload();
 
       if (!payload) {
-        throw new Error('Invalid token payload');
+        throw new Error("Invalid token payload");
       }
 
       const email = payload.email;
       const name = payload.name;
 
       if (!email || !name) {
-        throw new Error('Email or name not provided in Google payload');
+        throw new Error("Email or name not provided in Google payload");
       }
 
       let user;
@@ -47,9 +57,9 @@ export class GoogleAuthService {
           user = await this.usersService.create({
             email,
             name,
-            password: '',
-            direccionEnvio: '',
-            role: 'USER',
+            password: "",
+            direccionEnvio: "",
+            role: "USER",
             googleId: payload.sub,
           });
         } else {
@@ -60,7 +70,7 @@ export class GoogleAuthService {
 
       // Si el usuario existe pero no tiene googleId, lo actualizamos
       if (user && !user.googleId) {
-        user = await this.usersService.update(user.id, { 
+        user = await this.usersService.update(user.id, {
           googleId: payload.sub,
           email: user.email,
           name: user.name,
@@ -69,8 +79,8 @@ export class GoogleAuthService {
 
       return user;
     } catch (error) {
-      console.error('Google authentication error:', error);
-      throw new UnauthorizedException('Failed to authenticate with Google');
+      console.error("Google authentication error:", error);
+      throw new UnauthorizedException("Failed to authenticate with Google");
     }
   }
 }
