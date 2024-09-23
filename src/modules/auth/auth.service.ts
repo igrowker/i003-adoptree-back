@@ -3,7 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import { ERROR_KEYS } from "../../constants";
 import { UsersService } from "../users/users.service";
-import { AuthPayloadDTO } from "./dto/auth-payload.dto";
+import { AuthPayloadDTO, LoginResponse } from "./dto/auth-payload.dto";
 import { LoginDto } from "./dto/login.dto";
 import { RegisterDto } from "./dto/register.dto";
 import { UpdateUserDto } from "./dto/update-profile.dto";
@@ -26,7 +26,6 @@ export class AuthService {
       return {
         id: createdUser.id,
         name: createdUser.name,
-        surname: createdUser.surname,
         email: createdUser.email,
       };
     } catch (error) {
@@ -46,8 +45,9 @@ export class AuthService {
 
     return this.createToken(user);
   }
+  
 
-  async createToken(user: User): Promise<AuthPayloadDTO> {
+  async createToken(user: User): Promise<LoginResponse> {
     const token = await this.jwtService.signAsync({
       id: user.id,
       email: user.email,
@@ -55,13 +55,7 @@ export class AuthService {
     });
 
     return {
-      id: user.id.toString(),
-      name: user.name,
-      email: user.email,
-      surname: user.surname,
-      direccionEnvio: user.direccionEnvio,
-      arbolId: user.arbolId,
-      role: user.role,
+      user,
       token,
     };
   }
@@ -69,7 +63,7 @@ export class AuthService {
   async updateProfile(
     input: UpdateUserDto,
     email: string
-  ): Promise<AuthPayloadDTO> {
+  ): Promise<LoginResponse> {
     const user = await this.usersService.findOneByEmail(email);
 
     if (!user) {
