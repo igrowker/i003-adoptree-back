@@ -4,8 +4,8 @@ cd /home/ubuntu/i003-adoptree-back
 
 DUCKDNS_DOMAIN="adoptree.duckdns.org"
 
-if [ -f "/home/ubuntu/backendpf/duckdns.env" ]; then
-  export $(grep -v '^#' /home/ubuntu/backendpf/duckdns.env | xargs)
+if [ -f "/home/ubuntu/i003-adoptree-back/duckdns.env" ]; then
+  export $(grep -v '^#' /home/ubuntu/i003-adoptree-back/duckdns.env | xargs)
 else
   echo "El archivo duckdns.env no se encuentra en /home/ubuntu."
   exit 1
