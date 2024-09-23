@@ -18,5 +18,5 @@ export class UpdateUserDto {
   googleId?: string;
 
   @IsOptional()
-  avatar?: any;
+  avatar?: "" | null;
 }
