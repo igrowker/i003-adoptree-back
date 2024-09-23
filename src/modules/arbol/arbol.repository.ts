@@ -8,7 +8,6 @@ export type ArbolRepo = Prisma.ArbolGetPayload<{
       select: {
         id: true;
         name: true;
-        surname: true;
         direccionEnvio: true;
         email: true;
       };
@@ -53,7 +52,6 @@ export class ArbolRepository {
       select: {
         id: true,
         name: true,
-        surname: true,
         direccionEnvio: true,
         email: true,
       },

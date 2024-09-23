@@ -47,7 +47,6 @@ export class GoogleAuthService {
           user = await this.usersService.create({
             email,
             name,
-            surname: '',
             password: '',
             direccionEnvio: '',
             role: 'USER',

@@ -8,10 +8,6 @@ export class RegisterDto {
   @MinLength(1)
   name!: string;
 
-  @IsString()
-  @MinLength(1)
-  surname!: string;
-
   @IsEmail()
   email!: string;
 

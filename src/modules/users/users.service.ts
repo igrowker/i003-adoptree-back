@@ -31,7 +31,6 @@ export class UsersService {
 
     return this.usersRepo.create({
       name: input.name,
-      surname: input.surname,
       email: input.email,
       password: hashedPassword,
       direccionEnvio: input.direccionEnvio,

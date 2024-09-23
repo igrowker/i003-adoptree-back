@@ -1,4 +1,4 @@
-import { RoleEnum } from "@prisma/client";
+import { RoleEnum, User } from "@prisma/client";
 import { IsEnum } from "class-validator";
 
 export class AuthPayloadDTO {
@@ -7,7 +7,6 @@ export class AuthPayloadDTO {
   id: string;
   name: string;
   phone?: string;
-  surname?: string;
   token: string;
   direccionEnvio?: string;
   arbolId: number | null;
@@ -15,4 +14,10 @@ export class AuthPayloadDTO {
 
   @IsEnum(RoleEnum)
   role: RoleEnum;
+}
+
+
+export class LoginResponse { 
+  user: User;
+  token: string
 }
