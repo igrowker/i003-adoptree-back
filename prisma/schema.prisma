@@ -66,6 +66,7 @@ enum StatusTreeEnum {
 }
 
 enum EstadoDeEnvioEnum {
+  EN_PREPARACION
   DESPACHADO
   EN_CAMINO
   ENTREGADO
