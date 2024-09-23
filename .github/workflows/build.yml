@@ -49,7 +49,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
-                  msg: 'Falló el build de la rama :disappointed:. Por favor revisa los errores y toma las medidas necesarias. Action Run: [Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
+                  msg: 'Falló el build de la rama :disappointed: . Por favor revisa los errores y toma las medidas necesarias. Action Run: [Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
             - name: Comment on PR
               uses: unsplash/comment-on-pr@v1.3.0
               env:
