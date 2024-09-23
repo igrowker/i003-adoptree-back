@@ -2,20 +2,16 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
   Injectable,
   Param,
   Post,
   Put,
-  UseGuards,
 } from "@nestjs/common";
 import { RoleEnum } from "@prisma/client";
+import { CheckRoles, GetAuthPayload } from "../auth/decorators";
 import { UpdateUserDto } from "../auth/dto/update-profile.dto";
-import { CreateUserDto } from "./dto/create-user.dto"; // Ajusta la ruta según tu estructura
+import { CreateUserDto } from "./dto/create-user.dto";
 import { UsersService } from "./users.service";
-import { GetAuthPayload } from "../auth/decorators";
-import { AuthGuard } from "@nestjs/passport";
-import { get } from "http";
 
 @Injectable()
 @Controller("users")
@@ -23,8 +19,8 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Post()
+  @CheckRoles(RoleEnum.USER)
   createUser(@Body() createUserDto: CreateUserDto) {
-    const role: RoleEnum = RoleEnum.USER;
     return this.userService.create(createUserDto);
   }
 
@@ -37,12 +33,14 @@ export class UsersController {
   deleteUser(@Param("id") id: number) {
     return this.userService.remove(Number(id));
   }
-  
-  @Post('adoptar-arbol/:treeId')
+
+  @Post("adoptar-arbol/:treeId")
   //@UseGuards(AuthGuard("secret"))
-  async buyTree(@GetAuthPayload() authPayload: any,@Body('userId') userId: number, @Param('treeId') treeId: number) {
+  async buyTree(
+    @GetAuthPayload("id") userId: number,
+    @Param("treeId") treeId: number
+  ) {
     await this.userService.buyOneTree(userId, treeId);
-    return { message: 'La adopcion fue exitosa!'};
+    return { message: "La adopcion fue exitosa!" };
   }
 }
-

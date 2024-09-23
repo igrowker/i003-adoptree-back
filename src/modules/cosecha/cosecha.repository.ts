@@ -36,7 +36,7 @@ interface CosechaUpdateRepoInput {
 }
 
 interface CosechaFilterRepoInput {
-  arbolId: number;
+  arbolId?: number;
 }
 
 @Injectable()
