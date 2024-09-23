@@ -19,7 +19,6 @@
         "test:e2e": "jest --config ./test/jest-e2e.json"
     },
     "dependencies": {
-        "@hapi/joi": "^17.1.1",
         "@nestjs/common": "^10.0.0",
         "@nestjs/config": "^3.2.3",
         "@nestjs/core": "^10.0.0",
@@ -32,6 +31,8 @@
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.1",
         "dotenv": "^16.4.5",
+        "google-auth-library": "^9.14.1",
+        "joi": "^17.13.3",
         "jsonwebtoken": "^9.0.2",
         "lodash": "^4.17.21",
         "madge": "^8.0.0",
@@ -46,6 +47,7 @@
         "@nestjs/schematics": "^10.0.0",
         "@nestjs/testing": "^10.0.0",
         "@types/bcrypt": "^5.0.2",
+        "@types/joi": "^17.2.3",
         "@types/node": "^22.5.4",
         "@types/passport": "^1.0.16",
         "eslint": "^8.42.0",

@@ -4,7 +4,6 @@ import { PrismaService } from "nestjs-prisma"; // Asegúrate de que PrismaServic
 
 export interface UpdateUserInput {
   name?: string;
-  surname?: string;
 }
 
 @Injectable()
@@ -26,7 +25,6 @@ export class UsersRepository {
       where: { id },
       data: {
         name: input.name,
-        surname: input.surname,
       },
     });
   }

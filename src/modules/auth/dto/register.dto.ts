@@ -8,10 +8,6 @@ export class RegisterDto {
   @MinLength(1)
   name!: string;
 
-  @IsString()
-  @MinLength(1)
-  surname!: string;
-
   @IsEmail()
   email!: string;
 
@@ -22,6 +18,8 @@ export class RegisterDto {
 
   @IsString()
   direccionEnvio: string;
+
+  googleId?: string;
 
   @IsEnum(RoleEnum)
   role: RoleEnum;

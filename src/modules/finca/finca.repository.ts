@@ -12,7 +12,6 @@ export type FincaRepo = Prisma.FincaGetPayload<{
         user: {
           select: {
             name: true;
-            surname: true;
           };
         };
       };
@@ -49,7 +48,6 @@ export class FincaRepository {
         user: {
           select: {
             name: true,
-            surname: true,
           },
         },
       },
