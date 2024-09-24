@@ -8,7 +8,7 @@ export class ImageService {
   constructor(private readonly imageRepository: ImageRepository) {}
 
   async createImageEntity(createImageDto: CreateImageDto, id: string, entity: 'user' | 'finca' | 'cosecha') {
-          Number(entity)
+          console.log(entity)
           return  this.imageRepository.createImageEntity({
                 url: createImageDto.url,
                 entityNumber: Number(id),
@@ -35,13 +35,26 @@ export class ImageService {
   
   async deleteImageEntityById(id:number, entity: 'user' | 'finca' | 'cosecha', entityId : number) {
     let entityParsed = `${entity}Id`;
-    console.log(entityParsed)
-    console.log(id)
-    console.log(entity)
-
     return this.imageRepository.deleteImageEntityById(id, entityParsed, Number(entityId))
   }
 
+  async updateImageUrlByEntityId(id: number, createImageDto: CreateImageDto, entity: 'user' | 'finca' | 'cosecha', entityId: number) {
+    const validEntities = ['user', 'finca', 'cosecha'];
+    if(!id) {
+      throw new BadRequestException('Falta id de la imagen')
+    }
+    if(!validEntities.includes(entity)) {
+      throw new BadRequestException('Falta entity como query')
+    }
+    if(!createImageDto.url) {
+      throw new BadRequestException('No se encontro URL en el body')
+    }
+
+    let url = createImageDto.url
+    let entityParsed = `${entity}Id`;
+    const selectEntity = this.getSelectEntity(entity)
+    return this.imageRepository.updateImageUrlByEntityId(id, url, entityParsed, Number(entityId))
+  }
   private getSelectEntity(entity: 'user' | 'finca' | 'cosecha') {
     switch (entity) {
       case 'user':

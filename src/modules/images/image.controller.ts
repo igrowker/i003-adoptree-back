@@ -6,6 +6,7 @@ import {
     Param,
     Patch,
     Post,
+    Put,
     Query,
   } from "@nestjs/common";
 import { ImageService } from "./image.service";
@@ -41,5 +42,15 @@ export class ImageController {
     @Query('entityId') entityId : number,
   ) {
     return this.imageService.deleteImageEntityById(Number(id), entity, entityId)
+  }
+
+  @Put("update-image/:id/entity")
+  async updateImageByEntityId(
+    @Param("id") id : string,
+    @Query("entity") entity : 'user' | 'finca' | 'cosecha',
+    @Query("entityId") entityId : number,
+    @Body() createImageDto : CreateImageDto,
+  ) {
+    return this.imageService.updateImageUrlByEntityId(Number(id),createImageDto, entity, entityId )
   }
 }

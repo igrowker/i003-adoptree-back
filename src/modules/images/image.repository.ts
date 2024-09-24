@@ -70,4 +70,16 @@ export class ImageRepository {
       }
     })
   }
+
+  async updateImageUrlByEntityId(id: number, url: string, entityParsed: string, entityId: number ){
+    return this.prisma.image.updateMany({
+      where: {
+        id: id,
+        [entityParsed] : entityId,
+      },
+      data: {
+        url: url
+      }
+    })
+  }
 }
