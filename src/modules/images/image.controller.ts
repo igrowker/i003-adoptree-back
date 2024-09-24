@@ -4,14 +4,12 @@ import {
     Delete,
     Get,
     Param,
-    Patch,
     Post,
     Put,
     Query,
   } from "@nestjs/common";
 import { ImageService } from "./image.service";
 import { CreateImageDto } from "./dto/create-image.dto";
-import { Image } from "@prisma/client";
 
 @Controller("images")
 export class ImageController {

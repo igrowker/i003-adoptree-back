@@ -1,5 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
-import { Image } from "@prisma/client";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { ImageRepository } from "./image.repository";
 import { CreateImageDto } from "./dto/create-image.dto";
 
@@ -52,7 +51,6 @@ export class ImageService {
 
     let url = createImageDto.url
     let entityParsed = `${entity}Id`;
-    const selectEntity = this.getSelectEntity(entity)
     return this.imageRepository.updateImageUrlByEntityId(id, url, entityParsed, Number(entityId))
   }
   private getSelectEntity(entity: 'user' | 'finca' | 'cosecha') {

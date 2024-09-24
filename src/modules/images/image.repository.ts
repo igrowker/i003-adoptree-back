@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Prisma, Image} from "@prisma/client";
+import { Prisma} from "@prisma/client";
 import { PrismaService } from "nestjs-prisma";
 
 export type ImageUserRepo = Prisma.ImageGetPayload<{

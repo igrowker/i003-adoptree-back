@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsOptional, IsInt, IsIn, IsEnum } from "class-validator";
+import { IsString, IsOptional } from "class-validator";
 
 export class CreateImageDto {
     @IsString()
