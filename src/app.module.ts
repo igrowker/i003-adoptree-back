@@ -11,6 +11,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { AuthConfig, AuthEnvSchema } from './modules/auth/auth.config';
 import * as Joi from 'joi';
+import { ImageModule } from "./modules/images/image.module";
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import * as Joi from 'joi';
     ArbolModule,
     FincaModule,
     CosechaModule,
+    ImageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

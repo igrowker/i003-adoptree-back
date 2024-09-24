@@ -19,6 +19,7 @@ model User {
   avatar         String?
   arbol          Arbol[]
   Adoption       Adoption[]
+  image          Image[]
 }
 
 model Arbol {
@@ -40,6 +41,7 @@ model Finca {
   ubication            String
   practicesSustainable String
   arbol                Arbol[]
+  images               Image[]
 }
 
 model Cosecha {
@@ -49,6 +51,17 @@ model Cosecha {
   cantidad      Int
   fechaDeEnvio  DateTime
   estadoDeEnvio EstadoDeEnvioEnum
+}
+
+model Image {
+  id            Int               @id @default(autoincrement())
+  url           String
+  descripcion   String?
+  fincaId       Int?
+  userId        Int?
+
+  user          User?             @relation(fields: [userId], references: [id])
+  finca         Finca?            @relation(fields: [fincaId], references: [id])
 }
 
 enum RoleEnum {

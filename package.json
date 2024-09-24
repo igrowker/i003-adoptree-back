@@ -47,6 +47,7 @@
         "@nestjs/schematics": "^10.0.0",
         "@nestjs/testing": "^10.4.3",
         "@types/jest": "^29.5.13",
+        "@types/mocha": "^10.0.8",
         "@types/node": "^22.5.4",
         "@types/passport": "^1.0.16",
         "@typescript-eslint/eslint-plugin": "^8.6.0",
