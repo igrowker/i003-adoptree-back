@@ -51,6 +51,7 @@ model Cosecha {
   cantidad      Int
   fechaDeEnvio  DateTime
   estadoDeEnvio EstadoDeEnvioEnum
+  images        Image[]
 }
 
 model Image {
@@ -59,9 +60,11 @@ model Image {
   descripcion   String?
   fincaId       Int?
   userId        Int?
+  cosechaId     Int?
 
   user          User?             @relation(fields: [userId], references: [id])
   finca         Finca?            @relation(fields: [fincaId], references: [id])
+  cosecha       Cosecha?          @relation(fields: [cosechaId], references:[id])
 }
 
 enum RoleEnum {
