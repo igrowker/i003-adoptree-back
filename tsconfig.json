@@ -14,8 +14,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "strictPropertyInitialization": false, // Para evitar errores de inicialización
-    "noImplicitAny": false // Opcional, para desactivar advertencias por tipos implícitos
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ] // Asegúrate de agregar esto
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
