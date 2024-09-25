@@ -23,7 +23,7 @@ if [ -z "$DUCKDNS_DOMAIN" ]; then
   exit 1
 fi
 
-IP=$(curl -s http://ifconfig.me)
+IP=$(curl -s ipinfo.io/ip)
 IP=$(echo "$IP" | tr -d '[:space:]')
 DUCKDNS_TOKEN=$(echo "$DUCKDNS_TOKEN" | tr -d '[:space:]')
 
