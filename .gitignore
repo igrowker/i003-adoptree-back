@@ -23,3 +23,8 @@ letsencrypt
 *.njsproj
 *.sln
 *.sw?
+coverage/
+adoptree.key
+adoptree.key.pub
+.env.prod
+.env.dev
