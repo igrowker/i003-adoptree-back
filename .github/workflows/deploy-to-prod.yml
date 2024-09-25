@@ -161,7 +161,9 @@ jobs:
                   script: |
                       cd ${{ secrets.VPS_DIR }}
                       git checkout ${{ secrets.GIT_BRANCH }}
+                      git reset --hard origin/${{ secrets.GIT_BRANCH }}
                       git pull
+                      chmod +x curl-duck.sh
                       docker-compose down ${{ secrets.COMPOSE_SERVICE }}
                       docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{steps.repo-name.outputs.repository-name}}:latest
                       docker-compose up -d ${{ secrets.COMPOSE_SERVICE }}
