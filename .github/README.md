@@ -26,3 +26,33 @@ Esta pipeline de integración continua (CI) está diseñada para desplegar el c�
 ## Ejecución
 
 La ejecución de la pipeline de `Deploy to Dev` de CI/CD se realiza automáticamente cada vez que se mergea a la rama `develop`. Si se detecta un error en la despliegue o en el Build de la imagen de docker, se creará un issue automáticamente para que se puedan revisar y solucionar los problemas.
+
+## Pipeline de CI/CD para Deploy de Producción a una VPS
+
+## Descripción
+
+Esta pipeline de integración continua (CI) está diseñada para desplegar el código del repositorio en un entorno de producción.
+
+## Ejecución
+
+La ejecución de la pipeline de `Deploy to Prod` de CI/CD se realiza automáticamente cada vez que se mergea a la rama `main`. Si se detecta un error en la despliegue o en el Build de la imagen de docker, se creará un issue automáticamente para que se puedan revisar y solucionar los problemas.
+
+### Docker Compose
+
+Para desplegar el código en un entorno de producción, se utiliza Docker Compose. Docker Compose es una herramienta de línea de comandos que permite definir y ejecutar aplicaciones y servicios en contenedores. Con Docker Compose, se puede crear y administrar un entorno de desarrollo de aplicaciones de manera eficiente y fácil.
+
+Los archivos de configuración de Docker Compose se encuentran en el directorio `docker-compose.yml`. Este archivo describe los servicios que se desean desplegar en el entorno de producción, incluyendo la imagen de Docker, las variables de entorno, las redes y los volumenes.
+
+Los servicios que se incluyen en el archivo `docker-compose.yml` son:
+
+-   `nginx-proxy`: Un proxy que se utiliza para manejar las solicitudes HTTP y HTTPS y redireccionarlas a los servicios correspondientes.
+-   `prometheus`: Un servidor de monitoreo y análisis de sistemas de cómputo que se utiliza para recopilar y analizar datos de rendimiento y estado de los servicios.
+-   `grafana`: Un servidor de visualización de datos que se utiliza para crear paneles de gráficos y visualizaciones de datos.
+-   `loki`: Un servidor de análisis de log de cómputo que se utiliza para almacenar y analizar los datos de log de los servicios.
+-   `promtail`: Un agente de log de cómputo que se utiliza para recopilar y enviar los datos de log a `loki`.
+-   `cadvisor`: Un agente de monitorización de cómputo que se utiliza para monitorear y recopilar métricas de rendimiento y uso de recursos de los contenedores.
+-   `adoptree-api`: Es el servicio que se desea desplegar en el entorno de producción.
+
+## Configuración de variables de entorno
+
+Para configurar las variables de entorno, se utiliza el archivo `.env`.
