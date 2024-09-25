@@ -1,18 +1,25 @@
 #!/bin/bash
 
-cd /home/ubuntu/i003-adoptree-back
 
-DUCKDNS_DOMAIN="adoptree.duckdns.org"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-if [ -f "/home/ubuntu/i003-adoptree-back/duckdns.env" ]; then
-  export $(grep -v '^#' /home/ubuntu/i003-adoptree-back/duckdns.env | xargs)
+ENV_PATH="$SCRIPT_DIR/duckdns.env"
+
+cd "$SCRIPT_DIR"
+
+if [ -f "$ENV_PATH" ]; then
+  export $(grep -v '^#' "$ENV_PATH" | xargs )
 else
-  echo "El archivo duckdns.env no se encuentra en /home/ubuntu."
+  echo "El archivo duckdns.env no se encuentra en el directorio actual."
   exit 1
 fi
 
 if [ -z "$DUCKDNS_TOKEN" ]; then
   echo "El token de DuckDNS no está definido."
+  exit 1
+fi
+if [ -z "$DUCKDNS_DOMAIN" ]; then
+  echo "El dominio DuckDNS no está definido."
   exit 1
 fi
 
@@ -31,7 +38,6 @@ echo "URL1: $URL1"
 
 response1=$(curl -v -s "$URL1")
 echo "Respuesta 1: $response1"
-
 
 sleep 30
 
