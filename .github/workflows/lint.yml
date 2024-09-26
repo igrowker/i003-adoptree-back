@@ -1,11 +1,7 @@
 name: Lint
 
 on:
-    pull_request:
-        types: [opened, synchronize, reopened]
-        branches:
-            - main
-            - develop
+    push: null
 
 concurrency:
     group: lint-${{ github.ref }}
@@ -49,16 +45,3 @@ jobs:
                   BRANCH: ${{ github.ref }}
               with:
                   assignees: ${{ github.event.sender.login }}
-            - name: Comment on PR if failed
-              if: failure()
-              uses: unsplash/comment-on-pr@v1.3.0
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-              with:
-                  msg: 'Falló la verificación del Lint :dissapointed: . Por favor revisa los errores y toma las medidas necesarias. Action Run: [Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
-            - name: Comment on PR
-              uses: unsplash/comment-on-pr@v1.3.0
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-              with:
-                  msg: 'El linter ha verificado el código :+1: :thumbsup:.'

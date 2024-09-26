@@ -1,9 +1,10 @@
 [![Deploy to Dev](https://github.com/igrowker/i003-adoptree-back/actions/workflows/devdeploy.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/devdeploy.yml)
 [![Build On Push](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build-on-push.yml)
-[![Build](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build.yml)
+[![onPR](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/onPR.yml)
 [![Lint](https://github.com/igrowker/i003-adoptree-back/actions/workflows/lint.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/lint.yml)
+[![deploy to prod](https://github.com/igrowker/i003-adoptree-back/actions/workflows/deploy-to-prod.yml/badge.svg?branch=main)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/deploy-to-prod.yml)
 
-# Pipeline de CI para Build y Lint
+# Pipeline de CI para Build y Lint on Push
 
 ## Descripción
 
@@ -13,9 +14,31 @@ Esta pipeline de integración continua (CI) está diseñada para verificar el es
 
 La ejecución de la pipeline de `Build On Push` de CI se realiza automáticamente cada vez que se realiza un `Push` en el repositorio. Si se detecta un error en la compilación o en la verificación de la sintaxis, se creará un issue en el repositorio para que se puedan revisar y solucionar los problemas.
 
+La ejecución de la pipeline de `Lint` de CI se realiza automáticamente cada vez que se realiza un `Push` en el repositorio. Si se detecta un error en la verificación de la sintaxis, se creará un issue en el repositorio para que se puedan revisar y solucionar los problemas.
+
+### Alcance
+
+Todas las ramas del repositorio.
+
+# Pipeline de CI para Build, Lint y Test on Pull Request
+
+## Descripción
+
+Esta pipeline de integración continua (CI) está diseñada para verificar el estado de compilación, aplicar reglas de linting y realizar pruebas al código del repositorio. El objetivo es garantizar que el código esté en buen estado antes de ser fusionado o desplegado en otros entornos.
+
+## Ejecución
+
 La ejecución de la pipeline de `Build` de CI se realiza automáticamente cada vez que se realiza una `Pull Request` en el repositorio a las ramas `Main` y `Develop`. Si se detecta un error en la compilación o en la verificación de la sintaxis, se creará un issue y un comentario en el `Pull Request` para que se puedan revisar y solucionar los problemas.
 
 La ejecución de la pipeline de `Lint` de CI se realiza automáticamente cada vez que se realiza una `Pull Request` en el repositorio. Si se detecta un error en la verificación de la sintaxis, se creará un issue y un comentario en el `Pull Request` para que se puedan revisar y solucionar los problemas.
+
+La ejecución de la pipeline de `Test` de CI se realiza automáticamente cada vez que se realiza una `Pull Request` en el repositorio. Si se detecta un error en la verificación de la sintaxis, se creará un issue y un comentario en el `Pull Request` para que se puedan revisar y solucionar los problemas.
+
+Las actions de Build y Lint se ejecutarán en paralelo y una vez finalizadas, se ejecutará la action de Test, la cual depende de la ejecución de la action de Build y de la ejecución de la action de Lint.
+
+## Alcance
+
+Ramas `main` y `develop`.
 
 # Pipeline de CI/CD para Deploy del desarrollo en Render
 
@@ -27,7 +50,11 @@ Esta pipeline de integración continua (CI) está diseñada para desplegar el c�
 
 La ejecución de la pipeline de `Deploy to Dev` de CI/CD se realiza automáticamente cada vez que se mergea a la rama `develop`. Si se detecta un error en la despliegue o en el Build de la imagen de docker, se creará un issue automáticamente para que se puedan revisar y solucionar los problemas.
 
-## Pipeline de CI/CD para Deploy de Producción a una VPS
+## Alcance
+
+Rama `develop`.
+
+# Pipeline de CI/CD para Deploy de Producción a una VPS
 
 ## Descripción
 
@@ -56,3 +83,7 @@ Los servicios que se incluyen en el archivo `docker-compose.yml` son:
 ## Configuración de variables de entorno
 
 Para configurar las variables de entorno, se utiliza el archivo `.env`.
+
+## Alcance
+
+Rama `main`.
