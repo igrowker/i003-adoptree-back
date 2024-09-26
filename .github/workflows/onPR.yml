@@ -54,12 +54,15 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
                   msg: '🔴 Falló el build de la rama :disappointed: ⚠️🛑. Por favor revisa los errores y toma las medidas necesarias. Action Run: [Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
+                  check_for_duplicate_msg: false
+
             - name: Comment on PR
               uses: unsplash/comment-on-pr@v1.3.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
                   msg: '🟢 El build ha sido exitoso :+1: :thumbsup:.'
+                  check_for_duplicate_msg: false
 
     lint:
         name: Lint
@@ -102,12 +105,14 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
                   msg: '🔴 Falló la verificación del Lint :dissapointed: ⚠️🛑. Por favor revisa los errores y toma las medidas necesarias. Action Run: [Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
+                  check_for_duplicate_msg: false
             - name: Comment on PR
               uses: unsplash/comment-on-pr@v1.3.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
                   msg: '🟢 El linter ha verificado el código :+1: :thumbsup:.'
+                  check_for_duplicate_msg: false
 
     test:
         name: Test
@@ -146,9 +151,11 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
                   msg: '🔴 Falló la verificación del los Test :dissapointed: ⚠️🛑. Por favor revisa los errores y toma las medidas necesarias. Action Run: [Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
+                  check_for_duplicate_msg: false
             - name: Comment on PR
               uses: unsplash/comment-on-pr@v1.3.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
                   msg: '🟢 Los test han pasado correctamente :+1: :thumbsup:.'
+                  check_for_duplicate_msg: false
