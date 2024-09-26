@@ -1,6 +1,6 @@
 [![Deploy to Dev](https://github.com/igrowker/i003-adoptree-back/actions/workflows/devdeploy.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/devdeploy.yml)
 [![Build On Push](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build-on-push.yml)
-[![onPR](https://github.com/igrowker/i003-adoptree-back/actions/workflows/build.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/onPR.yml)
+[![onPR](https://github.com/igrowker/i003-adoptree-back/actions/workflows/onPR.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/onPR.yml)
 [![Lint](https://github.com/igrowker/i003-adoptree-back/actions/workflows/lint.yml/badge.svg)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/lint.yml)
 [![deploy to prod](https://github.com/igrowker/i003-adoptree-back/actions/workflows/deploy-to-prod.yml/badge.svg?branch=main)](https://github.com/igrowker/i003-adoptree-back/actions/workflows/deploy-to-prod.yml)
 
