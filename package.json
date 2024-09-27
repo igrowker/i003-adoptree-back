@@ -24,7 +24,7 @@
         "@nestjs/core": "^10.0.0",
         "@nestjs/jwt": "^10.2.0",
         "@nestjs/passport": "^10.0.3",
-        "@nestjs/platform-express": "^10.0.0",
+        "@nestjs/platform-express": "^10.4.4",
         "@prisma/client": "^5.19.1",
         "@willsoto/nestjs-prometheus": "^6.0.1",
         "bcryptjs": "^2.4.3",
