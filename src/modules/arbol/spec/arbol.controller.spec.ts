@@ -41,6 +41,7 @@ describe("ArbolController", () => {
         type: "Pino",
         fincaId: 1,
         userId: 1,
+        images: [],
         statusTree: "ARBOLITO",
       };
       const result: Arbol = { id: 1, ...createArbolDto, active: true };
@@ -61,6 +62,7 @@ describe("ArbolController", () => {
           statusTree: "SEMILLA",
           fincaId: 1,
           userId: 1,
+          images: [],
           active: true,
         },
         {
@@ -69,6 +71,7 @@ describe("ArbolController", () => {
           statusTree: "SEMILLA",
           fincaId: 1,
           userId: 2,
+          images: [],
           active: true,
         },
       ];
@@ -88,6 +91,7 @@ describe("ArbolController", () => {
         statusTree: "ARBOLITO",
         fincaId: 1,
         userId: 1,
+        images: [],
         active: true,
       };
       const id = "1";
@@ -109,6 +113,7 @@ describe("ArbolController", () => {
         statusTree: "ARBOLITO",
         fincaId: 1,
         userId: 1,
+        images: [],
         active: true,
       };
       const id = 1;
@@ -128,6 +133,7 @@ describe("ArbolController", () => {
         statusTree: "SEMILLA",
         fincaId: 1,
         userId: 1,
+        images: [],
         active: true,
       };
       const id = 1;

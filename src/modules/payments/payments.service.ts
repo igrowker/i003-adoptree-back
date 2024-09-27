@@ -1,32 +1,74 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import * as mercadopago from "mercadopago";
+import { CreatePreferenceDto } from "./dto/create-preference.dto";
 
-interface PaymentItem {
-  title: string;
-  quantity: number;
-  currency_id: string;
-  unit_price: number;
-}
 
+
+// APP_USR-341628833607988-092515-ad00b538d3678e4da26563c2047b3d6a-2007985284
 @Injectable()
 export class PaymentsService {
+  private client : mercadopago.MercadoPagoConfig;
+  private payment : mercadopago.Payment;
+  private preference : mercadopago.Preference
   constructor() {
-    const accessToken = process.env.MERCADO_PAGO_ACCESS_TOKEN;
-    if (!accessToken) {
-      throw new Error("MERCADO_PAGO_ACCESS_TOKEN is not defined");
-    }
+   this.client = new mercadopago.MercadoPagoConfig({
+    accessToken: 'APP_USR-341628833607988-092515-ad00b538d3678e4da26563c2047b3d6a-2007985284'
+   })
 
-    // mercadopago.configure({
-    //   //   access_token: process.env.MERCADO_PAGO_ACCES_TOKEN,
-    // });
+   this.payment = new mercadopago.Payment(this.client)
+   this.preference = new mercadopago.Preference(this.client)
   }
 
-  async createPreference(items: PaymentItem[]): Promise<mercadopago.Response> {
-    const preference: mercadopago.Preference = {
-      items: items,
-    };
 
-    const response = await mercadopago.preferences.create(preference);
-    return response; // Devuelve el objeto de respuesta directamente
+
+  async createPayment(req: Request, createPreferenceDto : CreatePreferenceDto) {
+    // this.payment.create({body}).then(console.log).catch(console.log)
+
+    try{
+     
+      const body = {
+        items: [
+          {
+            id: createPreferenceDto.id,
+            title: createPreferenceDto.title,
+            quantity: createPreferenceDto.quantity,
+            unit_price: createPreferenceDto.unit_price,
+            description: createPreferenceDto.description,
+            currency_id: 'ARS',
+          }
+        ],
+        back_urls: {
+          success: "http://localhost:3000",
+          failure: "http://localhost:3000",
+          pending: "http://localhost:3000"
+        },
+        notification_url: "https://adoptree-tunnel.loca.lt/payments/webhook",
+        auto_return: "approved"
+      }
+      const result = await this.preference.create({ body })
+      return { url: result.init_point, item: result.items }
+        
+    } catch(error) {
+      return error
+    }
+  
+}
+
+  async receiveWebhook (body: any) {
+
+    if(body.type === 'payment') {
+      const data = await this.payment.get({
+        id: body.data.id
+      })
+     
+      console.log(data)
+     
+    return "webhook"
+  }
+}
+
+  async successPayment(query: string) {
+    console.log("SUCCESS QUERY", query)
+
   }
 }

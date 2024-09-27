@@ -26,6 +26,7 @@
         "@nestjs/passport": "^10.0.3",
         "@nestjs/platform-express": "^10.0.0",
         "@prisma/client": "^5.19.1",
+        "@types/mercadopago": "^1.5.11",
         "@willsoto/nestjs-prometheus": "^6.0.1",
         "bcryptjs": "^2.4.3",
         "class-transformer": "^0.5.1",

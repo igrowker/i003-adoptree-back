@@ -1,5 +1,5 @@
 import { StatusTreeEnum } from "@prisma/client";
-import { IsEnum, IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsEnum, IsInt, IsNotEmpty, IsString, IsArray } from "class-validator";
 
 export class CreateArbolDto {
   @IsString()
@@ -17,4 +17,9 @@ export class CreateArbolDto {
   @IsEnum(StatusTreeEnum)
   @IsNotEmpty()
   statusTree: StatusTreeEnum;
+
+  @IsArray()
+  @IsString({ each: true })
+  images: string[];
+
 }

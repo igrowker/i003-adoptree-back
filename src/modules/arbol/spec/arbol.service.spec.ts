@@ -41,7 +41,8 @@ describe("ArbolService", () => {
         type: "Pino",
         fincaId: 1,
         userId: 1,
-        statusTree: "ARBOLITO", // Asegúrate de que esto sea un valor válido del enum
+        statusTree: "ARBOLITO",
+        images: [],
       };
       const result: Arbol = {
         id: 1,
@@ -65,6 +66,7 @@ describe("ArbolService", () => {
           statusTree: "SEMILLA",
           fincaId: 0,
           userId: 0,
+          images: [],
           active: false,
         },
         {
@@ -73,6 +75,7 @@ describe("ArbolService", () => {
           statusTree: "SEMILLA",
           fincaId: 0,
           userId: 0,
+          images: [],
           active: true,
         },
       ];
@@ -92,6 +95,7 @@ describe("ArbolService", () => {
         statusTree: "ARBOLITO",
         fincaId: 0,
         userId: 0,
+        images: [],
         active: true,
       };
       const id = 1;
@@ -112,6 +116,7 @@ describe("ArbolService", () => {
         statusTree: "ARBOLITO",
         fincaId: 0,
         userId: 0,
+        images: [],
         active: true,
       };
       const id = 1;
@@ -134,6 +139,7 @@ describe("ArbolService", () => {
         statusTree: "SEMILLA",
         fincaId: 0,
         userId: 0,
+        images: [],
         active: true,
       };
       const id = 1;
