@@ -54,17 +54,17 @@ export class PaymentsService {
   
 }
 
-  async receiveWebhook (body: any) {
-
-    if(body.type === 'payment') {
-      const data = await this.payment.get({
-        id: body.data.id
-      })
+  async receiveWebhook (req: Request) {
+    
+    // if(body.type === 'payment') {
+    //   const data = await this.payment.get({
+    //     id: body.data.id
+    //   })
      
-      console.log(data)
+    //   console.log(data)
      
+    // }
     return "webhook"
-  }
 }
 
   async successPayment(query: string) {

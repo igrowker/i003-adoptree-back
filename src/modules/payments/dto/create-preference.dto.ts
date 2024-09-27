@@ -1,4 +1,4 @@
-import { IsEnum, IsInt, IsNotEmpty, IsString, IsArray } from "class-validator";
+import { IsInt, IsNotEmpty, IsString } from "class-validator";
 
 export class CreatePreferenceDto {
     @IsString()

@@ -30,9 +30,9 @@ export class PaymentsController {
 
     @Post("webhook")
     async receiveWebhook(
-        @Body() body : any,
+        @Req() req : Request,
     ) {
-        return this.paymentsService.receiveWebhook(body)
+        return this.paymentsService.receiveWebhook(req)
     }
 
 }
