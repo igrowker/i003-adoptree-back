@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import {  Injectable } from "@nestjs/common";
 import * as mercadopago from "mercadopago";
 import { CreatePreferenceDto } from "./dto/create-preference.dto";
 
@@ -55,7 +55,7 @@ export class PaymentsService {
 }
 
   async receiveWebhook (req: Request) {
-    
+    console.log(req.body)
     // if(body.type === 'payment') {
     //   const data = await this.payment.get({
     //     id: body.data.id
