@@ -55,6 +55,14 @@ export class ArbolRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   private readonly commonIncludes = {
+    finca: {
+      select: {
+        id: true,
+        name: true,
+        ubication: true,
+        practicesSustainable: true,
+      },
+    },
     user: {
       select: {
         id: true,
