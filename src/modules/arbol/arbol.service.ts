@@ -11,7 +11,6 @@ export class ArbolService {
   constructor(private readonly arbolRepository: ArbolRepository) {}
 
   async createArbol(createArbolDto: CreateArbolDto): Promise<Arbol> {
-    console.log("SERVICE: ",createArbolDto.type)
     return this.arbolRepository.create({
       type: createArbolDto.type,
       fincaId: createArbolDto.fincaId,
@@ -41,7 +40,6 @@ export class ArbolService {
     id: number
   ): Promise<{ id: number; statusTree: string, images : string[] }> {
     const statusTree = await this.arbolRepository.findStatusTreeById(id);
-    console.log(statusTree);
     if (!statusTree) {
       throw new NotFoundException(ERROR_KEYS.PRUEBA_TREE_NOT_FOUND);
     }

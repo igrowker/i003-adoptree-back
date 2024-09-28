@@ -38,20 +38,19 @@ describe("ArbolService", () => {
   describe("createArbol", () => {
     it("should create a new arbol", async () => {
       const createArbolDto: CreateArbolDto = {
-        type: "Pino",
         fincaId: 1,
-        userId: 1,
-        statusTree: "ARBOLITO",
         images: [],
+        statusTree: "SEMILLA",
+        type: "ArbolTipo",
+        userId: 1,
       };
+
       const result: Arbol = {
         id: 1,
-        ...createArbolDto,
         active: true,
-      }; // Mock del resultado
-
+        ...createArbolDto
+      }; 
       mockArbolRepository.create.mockResolvedValue(result);
-
       expect(await service.createArbol(createArbolDto)).toEqual(result);
       expect(mockArbolRepository.create).toHaveBeenCalledWith(createArbolDto);
     });
@@ -92,10 +91,10 @@ describe("ArbolService", () => {
       const result: Arbol = {
         id: 1,
         type: "Pino",
-        statusTree: "ARBOLITO",
+        statusTree: "SEMILLA",
         fincaId: 0,
         userId: 0,
-        images: [],
+        images:[],
         active: true,
       };
       const id = 1;
@@ -113,10 +112,10 @@ describe("ArbolService", () => {
       const result: Arbol = {
         id: 1,
         type: "Roble",
-        statusTree: "ARBOLITO",
+        statusTree: "SEMILLA",
         fincaId: 0,
         userId: 0,
-        images: [],
+        images:[],
         active: true,
       };
       const id = 1;
@@ -139,7 +138,7 @@ describe("ArbolService", () => {
         statusTree: "SEMILLA",
         fincaId: 0,
         userId: 0,
-        images: [],
+        images:[],
         active: true,
       };
       const id = 1;

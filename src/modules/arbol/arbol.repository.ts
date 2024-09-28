@@ -81,7 +81,7 @@ export class ArbolRepository {
         statusTree: input.statusTree,
         user: { connect: { id: input.userId } },
         type: input.type,
-        images: input.images,
+        images: input.images
       },
     });
   }
