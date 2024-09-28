@@ -32,6 +32,7 @@ model Arbol {
   active     Boolean?       @default(true)
   cosecha    Cosecha[]
   Adoption   Adoption[]
+  images   String[]
 }
 
 model Finca {

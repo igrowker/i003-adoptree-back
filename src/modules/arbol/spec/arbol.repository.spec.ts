@@ -37,7 +37,8 @@ describe("ArbolRepository", () => {
         type: "Pino",
         fincaId: 1,
         userId: 1,
-        statusTree: StatusTreeEnum.ARBOLITO,
+        statusTree: StatusTreeEnum.SEMILLA,
+       images: [],
       };
 
       const result: Arbol = { id: 1, ...input, active: true };
@@ -52,6 +53,7 @@ describe("ArbolRepository", () => {
           statusTree: input.statusTree,
           user: { connect: { id: input.userId } },
           type: input.type,
+          images: input.images,
         },
       });
     });
@@ -66,6 +68,7 @@ describe("ArbolRepository", () => {
           statusTree: StatusTreeEnum.ARBOLITO,
           fincaId: 1,
           userId: 1,
+          images:[],
           active: true,
         },
         {
@@ -74,6 +77,7 @@ describe("ArbolRepository", () => {
           statusTree: StatusTreeEnum.ARBOLITO,
           fincaId: 2,
           userId: 2,
+          images:[],
           active: true,
         },
       ];
@@ -96,6 +100,7 @@ describe("ArbolRepository", () => {
         statusTree: StatusTreeEnum.ARBOLITO,
         fincaId: 1,
         userId: 1,
+        images:[],
         active: true,
       };
       const id = 1;
@@ -116,6 +121,7 @@ describe("ArbolRepository", () => {
         type: "Roble",
         fincaId: 1,
         userId: 1,
+        images:[],
         statusTree: StatusTreeEnum.ARBOLITO,
       };
       const result: Arbol = { id: 1, ...input, active: true };
@@ -146,6 +152,7 @@ describe("ArbolRepository", () => {
         fincaId: 1,
         userId: 1,
         active: true,
+        images:[]
       };
       const id = 1;
 
@@ -171,6 +178,7 @@ describe("ArbolRepository", () => {
         select: {
           id: true,
           statusTree: true,
+          images: true
         },
       });
     });

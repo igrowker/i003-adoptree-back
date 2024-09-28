@@ -16,6 +16,7 @@ export class ArbolService {
       fincaId: createArbolDto.fincaId,
       userId: createArbolDto.userId,
       statusTree: createArbolDto.statusTree,
+      images: createArbolDto.images
     });
   }
 
@@ -37,9 +38,8 @@ export class ArbolService {
 
   async findStatusTreeById(
     id: number
-  ): Promise<{ id: number; statusTree: string }> {
+  ): Promise<{ id: number; statusTree: string, images : string[] }> {
     const statusTree = await this.arbolRepository.findStatusTreeById(id);
-    console.log(statusTree);
     if (!statusTree) {
       throw new NotFoundException(ERROR_KEYS.PRUEBA_TREE_NOT_FOUND);
     }
