@@ -79,6 +79,7 @@ Los servicios que se incluyen en el archivo `docker-compose.yml` son:
 -   `promtail`: Un agente de log de cómputo que se utiliza para recopilar y enviar los datos de log a `loki`.
 -   `cadvisor`: Un agente de monitorización de cómputo que se utiliza para monitorear y recopilar métricas de rendimiento y uso de recursos de los contenedores.
 -   `adoptree-api`: Es el servicio que se desea desplegar en el entorno de producción.
+-   `node-exporter`: Es un exportador de Prometheus que se utiliza para recopilar métricas a nivel de sistema, estas métricas se utilizan para monitorear el rendimiento y el uso de los recursos del sistema para luego enviarlas a Prometheus y Grafana.
 
 ## Configuración de variables de entorno
 
