@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query,Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { CreatePreferenceDto } from './dto/create-preference.dto';
 
