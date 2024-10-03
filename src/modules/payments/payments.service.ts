@@ -1,4 +1,4 @@
-import {  Inject, Injectable, NotFoundException } from "@nestjs/common";
+import {  Injectable, NotFoundException } from "@nestjs/common";
 import * as mercadopago from "mercadopago";
 import { CreatePreferenceDto } from "./dto/create-preference.dto";
 import { ArbolRepository } from "../arbol/arbol.repository";
@@ -98,7 +98,8 @@ export class PaymentsService {
             }
 
             //* paso los datos para hacer el update del estado
-            const reservarArbol = await this.arbolRepository.update(idParsed, input)
+            await this.arbolRepository.update(idParsed, input)
+           
 
           }
         }

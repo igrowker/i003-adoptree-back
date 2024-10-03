@@ -14,9 +14,7 @@ export class PaymentsController {
     }
 
     @Get("success")
-    async successPayment(
-        @Query() query: string
-    ) {
+    async successPayment() {
         return "success"
     }
     @Get("failure")
