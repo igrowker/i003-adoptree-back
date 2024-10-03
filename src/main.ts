@@ -6,6 +6,7 @@ import { AppModule } from "./app.module";
 import { initializeSocket } from './socket';
 
 // Exportamos la variable io
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export let io: any;  // Declarar la variable io para que sea exportada
 
 async function bootstrap() {
