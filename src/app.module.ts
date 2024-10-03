@@ -49,12 +49,12 @@ import { UsersModule } from "./modules/users/users.module";
   controllers: [AppController, PaymentsController],
   providers: [
     AppService,
+    PaymentsService,
     // Interceptor para prometheus
     {
       provide: APP_INTERCEPTOR,
       useClass: MetricsInterceptor,
     },
-    PaymentsService,
   ],
 })
 export class AppModule {}

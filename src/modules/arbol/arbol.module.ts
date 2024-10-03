@@ -7,5 +7,6 @@ import { ArbolService } from "./arbol.service";
 @Module({
   providers: [ArbolService, ArbolRepository, PrismaService],
   controllers: [ArbolController],
+  exports: [ArbolRepository]
 })
 export class ArbolModule {}

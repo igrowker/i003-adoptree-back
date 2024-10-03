@@ -1,6 +1,7 @@
-import {  Injectable } from "@nestjs/common";
+import {  Inject, Injectable, NotFoundException } from "@nestjs/common";
 import * as mercadopago from "mercadopago";
 import { CreatePreferenceDto } from "./dto/create-preference.dto";
+import { ArbolRepository } from "../arbol/arbol.repository";
 
 
 
@@ -10,7 +11,10 @@ export class PaymentsService {
   private client : mercadopago.MercadoPagoConfig;
   private payment : mercadopago.Payment;
   private preference : mercadopago.Preference
-  constructor() {
+  constructor(private arbolRepository : ArbolRepository) {
+
+    
+
    this.client = new mercadopago.MercadoPagoConfig({
     accessToken: 'APP_USR-341628833607988-092515-ad00b538d3678e4da26563c2047b3d6a-2007985284'
    })
@@ -42,7 +46,7 @@ export class PaymentsService {
           failure: "http://localhost:3000",
           pending: "http://localhost:3000"
         },
-        notification_url: "https://adoptree-tunnel.loca.lt/payments/webhook",
+        notification_url: "https://adoptree.loca.lt/payments/webhook",
         auto_return: "approved"
       }
       const result = await this.preference.create({ body })
@@ -54,21 +58,56 @@ export class PaymentsService {
   
 }
 
-  async receiveWebhook (req: Request) {
-    console.log(req.body)
-    // if(body.type === 'payment') {
-    //   const data = await this.payment.get({
-    //     id: body.data.id
-    //   })
-     
-    //   console.log(data)
-     
-    // }
+  async receiveWebhook (req) {
+
+   const paidState = req.body
+
+   if(paidState) {
+     if(paidState.type === 'payment') {
+
+       try{
+
+        //* payment.capture solo funciona con credenciales de Lives token = TEST. El .get funciona con usuarios prueba token=APP_USR
+         const data = await this.payment.get({
+           id: paidState.data.id
+         })
+
+         //* Verificamos que el estado del pago este aprovado.
+         if(data.status == 'approved') {
+          
+          //* Obtengo el cuerpo del pago. (Objeto que pago el usuario)
+          if(data.additional_info && data.additional_info.items) {
+            const items = data.additional_info.items[0]
+            
+            //* parseo el id del objeto comprado String -> Number. (Mercadopago lo requiere string y nuestra bd lo requiere Number)
+            const idParsed = Number(items.id)
+            
+            //* Obtengo el arbol con el id pagado para posteriormente cambiar el estado de active -> true
+            const arbolPagado = await this.arbolRepository.findOne(idParsed)
+            if (!arbolPagado) {
+              throw new NotFoundException('Árbol no encontrado'); // No encuentra arbol, pero el pago se hizo.
+            }
+
+            //* el update de arbolRepository requiere un parametro input con una interface definida en el repo (ArbolUpdateRepoInput)
+            const input = {
+              type: arbolPagado?.type,
+              fincaId: arbolPagado?.fincaId,
+              userId: arbolPagado?.userId,
+              statesTree: arbolPagado?.statusTree,
+              active: false
+            }
+
+            //* paso los datos para hacer el update del estado
+            const reservarArbol = await this.arbolRepository.update(idParsed, input)
+
+          }
+        }
+       } catch(error) {
+        console.log(error)
+       }
+     }
+   }
     return "webhook"
 }
 
-  async successPayment(query: string) {
-    console.log("SUCCESS QUERY", query)
-
-  }
 }
