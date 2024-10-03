@@ -84,6 +84,20 @@ services:
             - adoptree
         restart: unless-stopped
 
+    node-exporter:
+        image: quay.io/prometheus/node-exporter:latest
+        stdin_open: true
+        volumes:
+        - /:/host:ro,rslave
+        tty: true
+        ports:
+        - 9100:9100/tcp
+        restart: unless-stopped
+        command:
+        - --path.rootfs=/host
+        networks:
+          - adoptree
+
 networks:
     adoptree:
         driver: bridge
