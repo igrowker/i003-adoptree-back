@@ -22,4 +22,7 @@ export class CreateArbolDto {
   @IsString({ each: true })
   images: string[];
 
+  @IsString()
+  @IsNotEmpty()
+  price: string;
 }

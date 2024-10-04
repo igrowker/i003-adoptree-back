@@ -12,4 +12,8 @@ export class UpdateFincaDto {
   @IsString()
   @IsNotEmpty()
   practicesSustainable?: string;
+
+  images: String[]
+
+  productor: string
 }

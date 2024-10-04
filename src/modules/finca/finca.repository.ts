@@ -8,6 +8,7 @@ export type FincaRepo = Prisma.FincaGetPayload<{
       select: {
         active: true;
         statusTree: true;
+        price: true;
         type: true;
         user: {
           select: {
@@ -23,12 +24,14 @@ interface FincaCreateRepoInput {
   name: string;
   ubication: string;
   practicesSustainable: string;
+  productor: string;
 }
 
 interface FincaUpdateRepoInput {
   name?: string;
   ubication?: string;
   practicesSustainable?: string;
+  productor: string;
 }
 
 interface FincaFilterRepoInput {
@@ -45,6 +48,7 @@ export class FincaRepository {
         active: true,
         statusTree: true,
         type: true,
+        price: true,
         user: {
           select: {
             name: true,
@@ -61,6 +65,7 @@ export class FincaRepository {
         name: input.name,
         practicesSustainable: input.practicesSustainable,
         ubication: input.ubication,
+        productor: input.productor
       },
     });
   }

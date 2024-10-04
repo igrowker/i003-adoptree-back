@@ -35,6 +35,7 @@ describe("FincaRepository", () => {
         name: "Finca 1",
         ubication: "Location A",
         practicesSustainable: "",
+        productor: ""
       };
 
       const result = {
@@ -60,6 +61,7 @@ describe("FincaRepository", () => {
         name: "Updated Finca",
         ubication: "Updated Location",
         practicesSustainable: "",
+        productor: ""
       };
 
       const result = {

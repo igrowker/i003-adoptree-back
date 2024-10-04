@@ -16,7 +16,8 @@ export class ArbolService {
       fincaId: createArbolDto.fincaId,
       userId: createArbolDto.userId,
       statusTree: createArbolDto.statusTree,
-      images: createArbolDto.images
+      images: createArbolDto.images,
+      price: createArbolDto.price
     });
   }
 

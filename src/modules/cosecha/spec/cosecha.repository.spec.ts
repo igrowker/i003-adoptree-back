@@ -47,11 +47,13 @@ describe("CosechaRepository", () => {
           id: input.arbolId,
           statusTree: "ARBOLITO",
           type: "Apple",
+          price: "",
           finca: {
             id: 1,
             name: "Finca 1",
             practicesSustainable: "Sostenible",
             ubication: "Location A",
+            productor: ""
           },
         },
       };
@@ -86,6 +88,7 @@ describe("CosechaRepository", () => {
             id: 1,
             statusTree: "ARBOLITO",
             type: "Apple",
+            price: "",
             finca: {
               id: 1,
               name: "Finca 1",
@@ -120,6 +123,7 @@ describe("CosechaRepository", () => {
           id: 1,
           statusTree: "ARBOL_JOVEN",
           type: "Apple",
+          price: "",
           finca: {
             id: 1,
             name: "Finca 1",
@@ -170,6 +174,7 @@ describe("CosechaRepository", () => {
           id: 1,
           statusTree: "ARBOL_JOVEN",
           type: "Apple",
+          price: "",
           finca: {
             id: 1,
             name: "Finca 1",
@@ -204,6 +209,7 @@ describe("CosechaRepository", () => {
           id: 1,
           statusTree: "ARBOL_JOVEN",
           type: "Apple",
+          price: "",
           finca: {
             id: 1,
             name: "Finca 1",

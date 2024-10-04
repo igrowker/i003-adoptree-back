@@ -17,39 +17,51 @@ model User {
   password       String
   googleId       String?
   avatar         String?
-  arbol          Arbol[]
   Adoption       Adoption[]
+  arbol          Arbol[]
 }
 
 model Arbol {
   id         Int            @id @default(autoincrement())
   type       String
   statusTree StatusTreeEnum
-  finca      Finca          @relation(fields: [fincaId], references: [id], onDelete: Cascade)
   fincaId    Int            @default(1)
-  user       User           @relation(fields: [userId], references: [id])
   userId     Int
   active     Boolean?       @default(true)
-  cosecha    Cosecha[]
+  images     String[]
+  price      String         @default("default_price")
   Adoption   Adoption[]
-  images   String[]
+  finca      Finca          @relation(fields: [fincaId], references: [id], onDelete: Cascade)
+  user       User           @relation(fields: [userId], references: [id])
+  cosecha    Cosecha[]
 }
 
 model Finca {
-  id                   Int     @id @default(autoincrement())
+  id                   Int      @id @default(autoincrement())
   name                 String
   ubication            String
   practicesSustainable String
+  images               String[]
+  productor            String   @default("default_productor")
   arbol                Arbol[]
 }
 
 model Cosecha {
   id            Int               @id @default(autoincrement())
   arbolId       Int
-  arbol         Arbol             @relation(fields: [arbolId], references: [id])
   cantidad      Int
   fechaDeEnvio  DateTime
   estadoDeEnvio EstadoDeEnvioEnum
+  arbol         Arbol             @relation(fields: [arbolId], references: [id])
+}
+
+model Adoption {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  treeId       Int
+  purchaseDate DateTime
+  tree         Arbol    @relation(fields: [treeId], references: [id])
+  user         User     @relation(fields: [userId], references: [id])
 }
 
 enum RoleEnum {
@@ -57,7 +69,6 @@ enum RoleEnum {
   USER
 }
 
-//These states are in increasing order
 enum StatusTreeEnum {
   SEMILLA
   PLANTULA
@@ -74,13 +85,4 @@ enum EstadoDeEnvioEnum {
   DESPACHADO
   EN_CAMINO
   ENTREGADO
-}
-
-model Adoption {
-  id           Int      @id @default(autoincrement())
-  userId       Int
-  user         User     @relation(fields: [userId], references: [id])
-  treeId       Int
-  tree         Arbol    @relation(fields: [treeId], references: [id])
-  purchaseDate DateTime
 }

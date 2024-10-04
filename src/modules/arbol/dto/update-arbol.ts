@@ -17,4 +17,8 @@ export class UpdateArbolDto {
   @IsEnum(StatusTreeEnum)
   @IsOptional()
   statusTree?: StatusTreeEnum;
+
+  @IsString()
+  @IsOptional()
+  price?: string;
 }

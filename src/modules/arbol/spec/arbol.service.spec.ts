@@ -42,6 +42,7 @@ describe("ArbolService", () => {
         images: [],
         statusTree: "SEMILLA",
         type: "ArbolTipo",
+        price: "",
         userId: 1,
       };
 
@@ -67,6 +68,7 @@ describe("ArbolService", () => {
           userId: 0,
           images: [],
           active: false,
+          price: ""
         },
         {
           id: 2,
@@ -76,6 +78,7 @@ describe("ArbolService", () => {
           userId: 0,
           images: [],
           active: true,
+          price: ""
         },
       ];
 
@@ -96,6 +99,7 @@ describe("ArbolService", () => {
         userId: 0,
         images:[],
         active: true,
+        price: ""
       };
       const id = 1;
 
@@ -117,6 +121,7 @@ describe("ArbolService", () => {
         userId: 0,
         images:[],
         active: true,
+        price: ""
       };
       const id = 1;
 
@@ -140,6 +145,7 @@ describe("ArbolService", () => {
         userId: 0,
         images:[],
         active: true,
+        price: ""
       };
       const id = 1;
 
