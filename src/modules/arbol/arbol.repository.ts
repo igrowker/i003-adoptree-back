@@ -42,6 +42,7 @@ interface ArbolUpdateRepoInput {
   fincaId?: number;
   userId?: number;
   statusTree?: StatusTreeEnum;
+  active?: boolean;
 }
 
 interface ArbolFilterRepoInput {
@@ -146,6 +147,7 @@ export class ArbolRepository {
         finca: { connect: { id: input.fincaId } },
         type: input.type,
         user: { connect: { id: input.userId } },
+        active: input?.active,
       },
     });
   }
