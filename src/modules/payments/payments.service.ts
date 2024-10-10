@@ -43,9 +43,9 @@ export class PaymentsService {
           }
         ],
         back_urls: {
-          success: "http://localhost:3000",
-          failure: "http://localhost:3000",
-          pending: "http://localhost:3000"
+          success: "http://localhost:5173/",
+          failure: "http://localhost:5173/",
+          pending: "http://localhost:5173/"
         },
         notification_url: "https://adoptree.loca.lt/payments/webhook",
         auto_return: "approved"
