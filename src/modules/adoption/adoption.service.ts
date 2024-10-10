@@ -43,9 +43,10 @@ export class AdoptionService {
       },
     });
 
-    if (!adoption) {
+    // Se comentó esta linea porque no pasaba el linter
+    // if (!adoption) {
       
-    }
+    // }
 
     return adoption;
   }
