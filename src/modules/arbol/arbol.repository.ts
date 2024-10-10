@@ -8,7 +8,6 @@ export type ArbolRepo = Prisma.ArbolGetPayload<{
       select: {
         id: true;
         name: true;
-        direccionEnvio: true;
         email: true;
       };
     };
@@ -35,6 +34,7 @@ interface ArbolCreateRepoInput {
   userId: number;
   statusTree: StatusTreeEnum;
   images: string[];
+  price: string
 }
 
 interface ArbolUpdateRepoInput {
@@ -42,6 +42,7 @@ interface ArbolUpdateRepoInput {
   fincaId?: number;
   userId?: number;
   statusTree?: StatusTreeEnum;
+  price?: string;
   active?: boolean;
 }
 
@@ -62,13 +63,13 @@ export class ArbolRepository {
         name: true,
         ubication: true,
         practicesSustainable: true,
+        productor: true
       },
     },
     user: {
       select: {
         id: true,
         name: true,
-        direccionEnvio: true,
         email: true,
       },
     },
@@ -90,7 +91,7 @@ export class ArbolRepository {
         statusTree: input.statusTree,
         user: { connect: { id: input.userId } },
         type: input.type,
-        images: input.images
+        images: input.images,
       },
     });
   }
@@ -148,6 +149,7 @@ export class ArbolRepository {
         type: input.type,
         user: { connect: { id: input.userId } },
         active: input?.active,
+        price: input.price
       },
     });
   }

@@ -55,7 +55,6 @@ describe("AuthService", () => {
         email: "test@example.com",
         password: "password",
         name: "Test User",
-        direccionEnvio: "",
         role: "ADMIN",
         avatar: "",
       };
@@ -78,7 +77,6 @@ describe("AuthService", () => {
         email: "test@example.com",
         password: "password",
         name: "Test User",
-        direccionEnvio: "",
         role: "ADMIN",
         avatar: "",
       };

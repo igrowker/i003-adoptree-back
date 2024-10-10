@@ -2,6 +2,7 @@ import {  Injectable, NotFoundException } from "@nestjs/common";
 import * as mercadopago from "mercadopago";
 import { CreatePreferenceDto } from "./dto/create-preference.dto";
 import { ArbolRepository } from "../arbol/arbol.repository";
+import { io } from "../../main";
 
 
 
@@ -42,9 +43,9 @@ export class PaymentsService {
           }
         ],
         back_urls: {
-          success: "http://localhost:3000",
-          failure: "http://localhost:3000",
-          pending: "http://localhost:3000"
+          success: "http://localhost:5173/",
+          failure: "http://localhost:5173/",
+          pending: "http://localhost:5173/"
         },
         notification_url: "https://adoptree.loca.lt/payments/webhook",
         auto_return: "approved"
@@ -66,7 +67,6 @@ export class PaymentsService {
      if(paidState.type === 'payment') {
 
        try{
-
         //* payment.capture solo funciona con credenciales de Lives token = TEST. El .get funciona con usuarios prueba token=APP_USR
          const data = await this.payment.get({
            id: paidState.data.id
@@ -87,6 +87,8 @@ export class PaymentsService {
             if (!arbolPagado) {
               throw new NotFoundException('Árbol no encontrado'); // No encuentra arbol, pero el pago se hizo.
             }
+
+            io.emit('new_adption', arbolPagado)
 
             //* el update de arbolRepository requiere un parametro input con una interface definida en el repo (ArbolUpdateRepoInput)
             const input = {

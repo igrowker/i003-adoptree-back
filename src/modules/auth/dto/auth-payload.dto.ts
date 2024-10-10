@@ -8,7 +8,6 @@ export class AuthPayloadDTO {
   name: string;
   phone?: string;
   token: string;
-  direccionEnvio?: string;
   arbolId: number | null;
   googleId?: string;
 

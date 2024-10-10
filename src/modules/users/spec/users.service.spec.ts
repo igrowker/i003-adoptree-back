@@ -37,7 +37,6 @@ describe("UsersRepository", () => {
       const userData = {
         email: "test@example.com",
         name: "Test User",
-        direccionEnvio: "",
         role: RoleEnum.ADMIN, // Asegúrate de usar el valor de la enumeración
         password: "password123",
         arbolId: 1,
@@ -65,9 +64,7 @@ describe("UsersRepository", () => {
         id: 1,
         email,
         name: "Test User",
-        direccionEnvio: "",
         role: "ADMIN",
-        arbolId: 1,
         password: "password123",
         googleId: "3",
         avatar: "",
@@ -100,9 +97,7 @@ describe("UsersRepository", () => {
       const result: User = {
         id,
         email: "test@example.com",
-        direccionEnvio: "",
         role: "ADMIN",
-        arbolId: 1,
         password: "password123",
         googleId: "1",
         avatar: "",
@@ -126,9 +121,7 @@ describe("UsersRepository", () => {
         id,
         email: "test@example.com",
         name: "Test User",
-        direccionEnvio: "",
         role: "ADMIN",
-        arbolId: 1,
         password: "password123",
         googleId: "2",
         avatar: "",
@@ -147,11 +140,12 @@ describe("UsersRepository", () => {
     it("should create an adoption record", async () => {
       const userId = 1;
       const treeId = 2;
-      const result = { userId, treeId, purchaseDate: new Date() };
+      const shippingAddressId = 1;
+      const result = { userId, treeId, purchaseDate: new Date(), shippingAddressId };
 
       mockPrismaService.adoption.create.mockResolvedValue(result);
 
-      expect(await usersRepository.buyTreeUser(userId, treeId)).toEqual(result);
+      expect(await usersRepository.buyTreeUser(userId, treeId, shippingAddressId)).toEqual(result);
       expect(mockPrismaService.adoption.create).toHaveBeenCalledWith({
         data: { userId, treeId, purchaseDate: expect.any(Date) },
       });

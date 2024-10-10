@@ -36,11 +36,14 @@ describe("FincaController", () => {
         name: "Finca 1",
         ubication: "Location A",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
       const result: Finca = {
         id: 1,
         ...createFincaDto,
         practicesSustainable: "",
+        images: [""]
       }; // Asegúrate de incluir todos los campos requeridos.
 
       mockFincaService.createFinca.mockResolvedValue(result);
@@ -58,12 +61,16 @@ describe("FincaController", () => {
           name: "Finca 1",
           ubication: "Location A",
           practicesSustainable: "",
+          images: [""],
+          productor: ""
         },
         {
           id: 2,
           name: "Finca 2",
           ubication: "Location B",
           practicesSustainable: "",
+          images: [""],
+          productor: ""
         },
       ];
 
@@ -82,6 +89,8 @@ describe("FincaController", () => {
         name: "Finca 1",
         ubication: "Location A",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
 
       mockFincaService.getFincaDetails.mockResolvedValue(result);
@@ -98,13 +107,17 @@ describe("FincaController", () => {
         name: "Updated Finca",
         ubication: "Updated Location",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
       const result: Finca = {
         id,
         ...updateFincaDto,
         practicesSustainable: "",
+        images: [""],
         name: "",
         ubication: "",
+        productor: ""
       };
 
       mockFincaService.updateFinca.mockResolvedValue(result);
@@ -127,6 +140,8 @@ describe("FincaController", () => {
         name: "Finca 1",
         ubication: "Location A",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
 
       mockFincaService.deleteFinca.mockResolvedValue(result);

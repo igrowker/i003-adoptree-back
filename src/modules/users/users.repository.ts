@@ -32,13 +32,14 @@ export class UsersRepository {
   remove(id: number): Promise<User> {
     return this.prisma.user.delete({ where: { id } });
   }
-  async buyTreeUser(userId: number, treeId: number): Promise<Adoption> {
+  async buyTreeUser(userId: number, treeId: number, shippingAddressId: number): Promise<Adoption> {
     treeId = parseInt(treeId+'')
     return this.prisma.adoption.create({
       data: {
         userId,
         treeId,
         purchaseDate: new Date(),
+        shippingAddressId
       },
     });
   }

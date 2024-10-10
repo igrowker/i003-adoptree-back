@@ -51,7 +51,6 @@ describe("AuthController", () => {
         email: "test@example.com",
         password: "password",
         name: "",
-        direccionEnvio: "",
         role: "ADMIN",
         avatar: "",
       };

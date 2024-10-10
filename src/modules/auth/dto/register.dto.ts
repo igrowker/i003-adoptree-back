@@ -16,9 +16,6 @@ export class RegisterDto {
   @MinLength(6)
   password!: string;
 
-  @IsString()
-  direccionEnvio: string;
-
   googleId?: string;
 
   @IsEnum(RoleEnum)

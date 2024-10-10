@@ -19,7 +19,7 @@
     "typeRoots": [
       "./node_modules/@types",
       "./src/@types"
-    ] // Asegúrate de agregar esto
+    ],
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

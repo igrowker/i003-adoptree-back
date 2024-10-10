@@ -9,6 +9,7 @@ export type CosechaRepo = Prisma.CosechaGetPayload<{
         id: true;
         statusTree: true;
         type: true;
+        price: true,
         finca: {
           select: {
             id: true;
@@ -49,12 +50,14 @@ export class CosechaRepository {
         id: true,
         statusTree: true,
         type: true,
+        price: true,
         finca: {
           select: {
             id: true,
             name: true,
             practicesSustainable: true,
             ubication: true,
+            productor: true
           },
         },
       },

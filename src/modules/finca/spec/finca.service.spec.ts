@@ -37,6 +37,8 @@ describe("FincaService", () => {
         name: "Finca 1",
         ubication: "Location A",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
       const result: Finca = { id: 1, ...createFincaDto };
 
@@ -56,12 +58,16 @@ describe("FincaService", () => {
         name: "Updated Finca",
         ubication: "Updated Location",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
       const existingFinca: Finca = {
         id,
         name: "",
         practicesSustainable: "",
         ubication: "",
+        images: [""],
+        productor: ""
       };
 
       mockFincaRepository.findFincaById.mockResolvedValue(existingFinca);
@@ -87,6 +93,8 @@ describe("FincaService", () => {
         name: "Updated Finca",
         ubication: "Updated Location",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
 
       mockFincaRepository.findFincaById.mockResolvedValue(null);
@@ -106,6 +114,8 @@ describe("FincaService", () => {
         name: "Finca 1",
         ubication: "Location A",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
 
       mockFincaRepository.findFincaById.mockResolvedValue(existingFinca);
@@ -136,12 +146,16 @@ describe("FincaService", () => {
           name: "Finca 1",
           ubication: "Location A",
           practicesSustainable: "",
+          images: [""],
+          productor: "" 
         },
         {
           id: 2,
           name: "Finca 2",
           ubication: "Location B",
           practicesSustainable: "",
+          images: [""],
+          productor: ""     
         },
       ];
 
@@ -160,6 +174,8 @@ describe("FincaService", () => {
         name: "Finca 1",
         ubication: "Location A",
         practicesSustainable: "",
+        images: [""],
+        productor: ""
       };
 
       mockFincaRepository.findFincaById.mockResolvedValue(result);

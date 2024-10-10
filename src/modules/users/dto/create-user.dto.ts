@@ -13,9 +13,6 @@ export class CreateUserDto {
   password: string;
 
   @IsString()
-  direccionEnvio: string;
-
-  @IsString()
   role: string;
 
   @IsString()

@@ -58,7 +58,6 @@ export class GoogleAuthService {
             email,
             name,
             password: "",
-            direccionEnvio: "",
             role: "USER",
             googleId: payload.sub,
           });
