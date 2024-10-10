@@ -33,14 +33,14 @@ export class UsersController {
   deleteUser(@Param("id") id: number) {
     return this.userService.remove(Number(id));
   }
-
   @Post("adoptar-arbol/:treeId")
   //@UseGuards(AuthGuard("secret"))
   async buyTree(
     @GetAuthPayload("id") userId: number,
-    @Param("treeId") treeId: number
+    @Param("treeId") treeId: number,
+    @Body("shippingAddressId") shippingAddressId: number
   ) {
-    await this.userService.buyOneTree(userId, treeId);
-    return { message: "La adopcion fue exitosa!" };
+    await this.userService.buyOneTree(userId, treeId, shippingAddressId);
+    return { message: "La adopción fue exitosa!" };
   }
 }

@@ -33,7 +33,6 @@ export class UsersService {
       name: input.name,
       email: input.email,
       password: hashedPassword,
-      direccionEnvio: input.direccionEnvio,
       role: 'USER',
     });
   }
@@ -53,7 +52,7 @@ export class UsersService {
     }
     await this.usersRepo.remove(id);
   }
-  async buyOneTree(userId: number, treeId: number): Promise<void> {
-    await this.usersRepo.buyTreeUser(userId, treeId);
+  async buyOneTree(userId: number, treeId: number, shippingAddressId: number): Promise<void> {
+    await this.usersRepo.buyTreeUser(userId, treeId, shippingAddressId);
   }
 }
