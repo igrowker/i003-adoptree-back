@@ -16,6 +16,8 @@ import { PrometheusCustomModule } from "./modules/metrics/metrics.module";
 import { PaymentsController } from "./modules/payments/payments.controller";
 import { PaymentsService } from "./modules/payments/payments.service";
 import { UsersModule } from "./modules/users/users.module";
+import { ShippingAddressModule } from "./modules/shipping-address/shipping-address.module";
+import { AdoptionModule } from "./modules/adoption/adoption.module";
 
 @Module({
   imports: [
@@ -45,6 +47,8 @@ import { UsersModule } from "./modules/users/users.module";
     FincaModule,
     CosechaModule,
     PrometheusCustomModule,
+    ShippingAddressModule,
+    AdoptionModule
   ],
   controllers: [AppController, PaymentsController],
   providers: [
