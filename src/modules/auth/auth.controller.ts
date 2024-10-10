@@ -31,7 +31,6 @@ export class AuthController {
   async googleLogin(@Body("credential") credential: string) {
     try {
       const user = await this.googleAuthService.validateUser(credential);
-      console.log(user);
       const payload = { username: user.email, sub: user.id };
       return {
         token: this.jwtService.sign(payload),

@@ -62,7 +62,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
           name: name.givenName,
           email: emails[0].value,
           password: "",
-          direccionEnvio: "",
           role: RoleEnum.USER,
         });
       }
