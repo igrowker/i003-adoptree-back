@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/shipping-address/shipping-address.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ShippingAddress } from '@prisma/client';
 import { ShippingAddressRepository } from './shipping-address.repository';
 // import { CreateShippingAddressDto } from './dto/create-shipping-address.dto';
