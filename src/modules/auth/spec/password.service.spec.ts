@@ -38,8 +38,8 @@ describe("PasswordService", () => {
         password: await bcrypt.hash(password, 10),
         role: RoleEnum.USER,
         name: "",
-        direccionEnvio: "",
-        arbolId: 1,
+ 
+   
         googleId: "1",
         avatar: "",
       };
@@ -77,8 +77,6 @@ describe("PasswordService", () => {
         password: await bcrypt.hash("correctpassword", 10),
         role: RoleEnum.USER,
         name: "",
-        direccionEnvio: "",
-        arbolId: 2,
         googleId: "2",
         avatar: "",
       };

@@ -34,7 +34,6 @@ describe("UsersController", () => {
       const createUserDto: CreateUserDto = {
         email: "test@example.com",
         name: "Test User",
-        direccionEnvio: "",
         role: RoleEnum.USER,
         password: "password123",
         googleId: "2",
@@ -83,8 +82,9 @@ describe("UsersController", () => {
     it("should allow a user to adopt a tree", async () => {
       const userId = 1;
       const treeId = 2;
+      const shippingAddressId = 1;
 
-      await usersController.buyTree(userId, treeId);
+      await usersController.buyTree(userId, treeId, shippingAddressId);
       expect(mockUsersService.buyOneTree).toHaveBeenCalledWith(userId, treeId);
     });
   });
