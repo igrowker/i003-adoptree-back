@@ -24,7 +24,6 @@ async function main() {
       data: {
         email: 'admin@example.com',
         name: 'Admin',
-        direccionEnvio: 'Calle Admin 123',
         role: RoleEnum.ADMIN,
         password: hashedPassword,
       },
@@ -33,7 +32,6 @@ async function main() {
       data: {
         email: 'user@example.com',
         name: 'Normal',
-        direccionEnvio: 'Calle User 456',
         role: RoleEnum.USER,
         password: hashedPassword,
       },

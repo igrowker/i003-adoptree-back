@@ -8,17 +8,30 @@ datasource db {
 }
 
 model User {
-  id             Int        @id @default(autoincrement())
-  email          String     @unique
-  name           String
-  direccionEnvio String
-  role           RoleEnum
-  arbolId        Int?
-  password       String
-  googleId       String?
-  avatar         String?
-  Adoption       Adoption[]
-  arbol          Arbol[]
+  id                Int               @id @default(autoincrement())
+  email             String            @unique
+  name              String
+  role              RoleEnum
+  password          String
+  googleId          String?
+  avatar            String?
+  Adoption          Adoption[]
+  arbol             Arbol[]
+  shippingAddresses ShippingAddress[]
+}
+
+model ShippingAddress {
+  id          Int        @id @default(autoincrement())
+  userId      Int
+  fullName    String
+  address     String
+  city        String
+  province    String
+  postalCode  String
+  country     String
+  phoneNumber String
+  Adoption    Adoption[]
+  user        User       @relation(fields: [userId], references: [id])
 }
 
 model Arbol {
@@ -56,12 +69,21 @@ model Cosecha {
 }
 
 model Adoption {
-  id           Int      @id @default(autoincrement())
-  userId       Int
-  treeId       Int
-  purchaseDate DateTime
-  tree         Arbol    @relation(fields: [treeId], references: [id])
-  user         User     @relation(fields: [userId], references: [id])
+  id                Int             @id @default(autoincrement())
+  userId            Int
+  treeId            Int
+  purchaseDate      DateTime
+  shippingAddressId Int
+  shippingAddress   ShippingAddress @relation(fields: [shippingAddressId], references: [id])
+  tree              Arbol           @relation(fields: [treeId], references: [id])
+  user              User            @relation(fields: [userId], references: [id])
+  status            AdoptionStatusEnum @default(PENDING)
+}
+
+enum AdoptionStatusEnum {
+  PENDING
+  COMPLETED
+  CANCELED
 }
 
 enum RoleEnum {
