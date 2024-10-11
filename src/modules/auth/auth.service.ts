@@ -3,7 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import { ERROR_KEYS } from "../../constants";
 import { UsersService } from "../users/users.service";
-import { LoginResponse } from "./dto/auth-payload.dto";
+import { AuthPayloadDTO, LoginResponse } from "./dto/auth-payload.dto";
 import { LoginDto } from "./dto/login.dto";
 import { RegisterDto } from "./dto/register.dto";
 import { UpdateUserDto } from "./dto/update-profile.dto";
@@ -72,5 +72,16 @@ export class AuthService {
     const updatedUser = await this.usersService.update(user.id, input);
 
     return this.createToken(updatedUser);
+  }
+
+  async getAuthPayloadByEmail(email: string): Promise<AuthPayloadDTO | null> {
+    // 1. Buscar el ususario.
+    const user = await this.usersService.findOneByEmail(email);
+    // 2. Si el usuario existe, crear token y devolver GqlAuthPayload.
+    if (user) {
+      return this.createToken(user);
+    }
+    // 3. Si el usuario no existe, devolver null.
+    return null;
   }
 }
