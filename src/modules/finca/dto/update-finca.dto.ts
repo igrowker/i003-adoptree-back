@@ -13,7 +13,7 @@ export class UpdateFincaDto {
   @IsNotEmpty()
   practicesSustainable?: string;
 
-  images: String[]
+  images: string[]
 
   productor: string
 }
