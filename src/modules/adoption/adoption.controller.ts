@@ -1,5 +1,6 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query, Param } from '@nestjs/common';
 import { AdoptionService } from './adoption.service';
+import { Adoption } from '@prisma/client';
 
 @Controller('adoptions')
 export class AdoptionController {
@@ -13,6 +14,13 @@ export class AdoptionController {
       adoptionData.shippingAddressId
     );
   }
+
+  @Get(":userId") // Cambiado a user/:userId para mayor claridad
+  async findOneByUserId(@Param("userId") userId: string): Promise<Adoption | null> {
+    console.log(userId)
+    return this.adoptionService.findOneByUserId(Number(userId)); // Cambia la lógica según sea necesario
+  }
+  
 
   @Get('pending')
   async getPendingAdoptions() {
