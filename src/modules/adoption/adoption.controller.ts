@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { AdoptionService } from './adoption.service';
 import { Adoption } from '@prisma/client';
 
