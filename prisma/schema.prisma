@@ -50,13 +50,27 @@ model Arbol {
 }
 
 model Finca {
-  id                   Int      @id @default(autoincrement())
+  id                   Int        @id @default(autoincrement())
   name                 String
   ubication            String
   practicesSustainable String
   images               String[]
-  productor            String   @default("default_productor")
   arbol                Arbol[]
+  productor            Productor?
+}
+
+model Productor {
+  id              Int      @id @default(autoincrement())
+  nombre          String
+  apellido        String
+  telefono        String
+  email           String?
+  direccion       String?
+  experiencia     Int?
+  especialidad    String?
+  certificaciones String[]
+  fincaId         Int      @unique
+  finca           Finca    @relation(fields: [fincaId], references: [id])
 }
 
 model Cosecha {
@@ -69,15 +83,15 @@ model Cosecha {
 }
 
 model Adoption {
-  id                Int             @id @default(autoincrement())
+  id                Int                @id @default(autoincrement())
   userId            Int
   treeId            Int
   purchaseDate      DateTime
   shippingAddressId Int
-  shippingAddress   ShippingAddress @relation(fields: [shippingAddressId], references: [id])
-  tree              Arbol           @relation(fields: [treeId], references: [id])
-  user              User            @relation(fields: [userId], references: [id])
   status            AdoptionStatusEnum @default(PENDING)
+  shippingAddress   ShippingAddress    @relation(fields: [shippingAddressId], references: [id])
+  tree              Arbol              @relation(fields: [treeId], references: [id])
+  user              User               @relation(fields: [userId], references: [id])
 }
 
 enum AdoptionStatusEnum {
