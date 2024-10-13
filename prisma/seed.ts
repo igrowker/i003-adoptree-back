@@ -13,9 +13,11 @@ async function main() {
   // Después elimina los usuarios
   await prisma.user.deleteMany({});
 
+  // Elimina los productores
+  await prisma.productor.deleteMany({});
+
   // Finalmente, elimina las fincas
   await prisma.finca.deleteMany({});
-
 
   // Seed Users
   const hashedPassword = await bcrypt.hash('password123', 10);
@@ -40,29 +42,51 @@ async function main() {
 
   console.log('Usuarios creados:', users);
 
-  // Seed Fincas
-  const fincas = await Promise.all([
-    prisma.finca.create({
-      data: {
-        name: 'Finca El Paraíso',
-        ubication: 'Valle del Cauca, Colombia',
-        practicesSustainable: 'Uso de compostaje y control biológico de plagas',
-        images: ["https://sevilla.abc.es/agronoma/wp-content/uploads/sites/13/2020/09/Finca-El-Cerro-1.jpg", "https://efeagro.com/wp-content/uploads/2016/07/foto-limones.jpg"],
-        productor: "Juan Garcia"
-      },
-    }),
-    prisma.finca.create({
-      data: {
-        name: 'Hacienda La Esperanza',
-        ubication: 'Antioquia, Colombia',
-        practicesSustainable: 'Sistemas de riego por goteo y energía solar',
-        images: ["https://content.cuerpomente.com/medio/2023/02/02/naranja-salvaje-un-proyecto-con-la-colaboracion-de-wwf_c3bb7f3b_1280x720.jpg", "https://predios.com.co/wp-content/uploads/2021/07/DJI_0208-scaled.jpg"],
-        productor: "Clara Molina"
-      },
-    }),
-  ]);
+// Seed Fincas y Productores
+const fincasWithProductores = await Promise.all([
+  prisma.finca.create({
+    data: {
+      name: 'Finca El Paraíso',
+      ubication: 'Mendoza, Argentina',
+      practicesSustainable: 'Uso de compostaje y control biológico de plagas',
+      images: ["https://sevilla.abc.es/agronoma/wp-content/uploads/sites/13/2020/09/Finca-El-Cerro-1.jpg", "https://efeagro.com/wp-content/uploads/2016/07/foto-limones.jpg"],
+      productor: {
+        create: {
+          nombre: "Juan",
+          apellido: "Garcia",
+          telefono: "+54 9 11 1234-5678",
+          email: "juan.garcia@example.com",
+          experiencia: 15,
+          especialidad: "Cítricos",
+          certificaciones: ["Orgánico", "Comercio Justo"]
+        }
+      }
+    },
+    include: { productor: true },
+  }),
+  prisma.finca.create({
+    data: {
+      name: 'Hacienda La Esperanza',
+      ubication: 'Tucumán, Argentina',
+      practicesSustainable: 'Sistemas de riego por goteo y energía solar',
+      images: ["https://content.cuerpomente.com/medio/2023/02/02/naranja-salvaje-un-proyecto-con-la-colaboracion-de-wwf_c3bb7f3b_1280x720.jpg", "https://predios.com.co/wp-content/uploads/2021/07/DJI_0208-scaled.jpg"],
+      productor: {
+        create: {
+          nombre: "Clara",
+          apellido: "Molina",
+          telefono: "+54 9 381 8765-4321",
+          email: "clara.molina@example.com",
+          experiencia: 20,
+          especialidad: "Agricultura sostenible",
+          certificaciones: ["Rainforest Alliance", "Global G.A.P."]
+        }
+      }
+    },
+    include: { productor: true },
+  }),
+]);
 
-  console.log('Fincas creadas:', fincas);
+console.log('Fincas y Productores creados:', fincasWithProductores);
 
   const arbolesList = [
     {
@@ -79,7 +103,7 @@ async function main() {
 
   // Seed Árboles
   const arboles = await Promise.all(
-    fincas.flatMap((finca) =>
+    fincasWithProductores.flatMap((finca) =>
       arbolesList.map((type) =>
         prisma.arbol.create({
           data: {

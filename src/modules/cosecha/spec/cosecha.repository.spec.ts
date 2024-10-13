@@ -53,7 +53,7 @@ describe("CosechaRepository", () => {
             name: "Finca 1",
             practicesSustainable: "Sostenible",
             ubication: "Location A",
-            productor: ""
+            productor: {}
           },
         },
       };
@@ -94,6 +94,7 @@ describe("CosechaRepository", () => {
               name: "Finca 1",
               practicesSustainable: "Sostenible",
               ubication: "Location A",
+              productor: {}
             },
           },
         },
@@ -129,6 +130,7 @@ describe("CosechaRepository", () => {
             name: "Finca 1",
             practicesSustainable: "Sostenible",
             ubication: "Location A",
+            productor: {}
           },
         },
       };
@@ -180,6 +182,7 @@ describe("CosechaRepository", () => {
             name: "Finca 1",
             practicesSustainable: "Sostenible",
             ubication: "Location A",
+            productor: {}
           },
         },
       };
@@ -215,6 +218,7 @@ describe("CosechaRepository", () => {
             name: "Finca 1",
             practicesSustainable: "Sostenible",
             ubication: "Location A",
+            productor: {}
           },
         },
       };

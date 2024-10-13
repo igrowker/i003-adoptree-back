@@ -85,7 +85,11 @@ describe("UsersController", () => {
       const shippingAddressId = 1;
 
       await usersController.buyTree(userId, treeId, shippingAddressId);
-      expect(mockUsersService.buyOneTree).toHaveBeenCalledWith(userId, treeId);
+      expect(mockUsersService.buyOneTree).toHaveBeenCalledWith(
+			userId,
+			treeId,
+			shippingAddressId
+		);
     });
   });
 });

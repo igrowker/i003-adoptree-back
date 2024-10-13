@@ -16,6 +16,7 @@ export type CosechaRepo = Prisma.CosechaGetPayload<{
             name: true;
             practicesSustainable: true;
             ubication: true;
+            productor: true
           };
         };
       };

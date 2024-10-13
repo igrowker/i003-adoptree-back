@@ -147,7 +147,7 @@ describe("UsersRepository", () => {
 
       expect(await usersRepository.buyTreeUser(userId, treeId, shippingAddressId)).toEqual(result);
       expect(mockPrismaService.adoption.create).toHaveBeenCalledWith({
-        data: { userId, treeId, purchaseDate: expect.any(Date) },
+        data: { userId, treeId, shippingAddressId, purchaseDate: expect.any(Date) },
       });
     });
   });
