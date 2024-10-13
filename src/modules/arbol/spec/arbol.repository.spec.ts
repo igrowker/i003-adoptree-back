@@ -136,15 +136,16 @@ describe("ArbolRepository", () => {
 
       expect(await repository.update(id, input)).toEqual(result);
       expect(mockPrismaService.arbol.update).toHaveBeenCalledWith({
-        include: expect.any(Object),
-        where: { id: id },
-        data: {
-          statusTree: input.statusTree,
-          finca: { connect: { id: input.fincaId } },
-          type: input.type,
-          user: { connect: { id: input.userId } },
-        },
-      });
+			include: expect.any(Object),
+			where: { id: id },
+			data: {
+				statusTree: input.statusTree,
+				finca: { connect: { id: input.fincaId } },
+				type: input.type,
+				user: { connect: { id: input.userId } },
+				price: input.price, // Se agrega el campo price
+			},
+		});
     });
   });
 
