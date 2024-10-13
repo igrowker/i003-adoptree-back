@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, Finca } from "@prisma/client";
+import { Prisma} from "@prisma/client";
 
 interface FincaCreateRepoInput {
   name: string;
