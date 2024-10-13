@@ -6,6 +6,7 @@ import { io } from "../../main";
 
 
 
+
 // APP_USR-341628833607988-092515-ad00b538d3678e4da26563c2047b3d6a-2007985284
 @Injectable()
 export class PaymentsService {
@@ -17,7 +18,7 @@ export class PaymentsService {
     
 
    this.client = new mercadopago.MercadoPagoConfig({
-    accessToken: 'APP_USR-341628833607988-092515-ad00b538d3678e4da26563c2047b3d6a-2007985284'
+    accessToken: process.env.MP_ACCESS_TOKEN ? process.env.MP_ACCESS_TOKEN : ''
    })
 
    this.payment = new mercadopago.Payment(this.client)
@@ -43,9 +44,9 @@ export class PaymentsService {
           }
         ],
         back_urls: {
-          success: "http://localhost:5173/",
-          failure: "http://localhost:5173/",
-          pending: "http://localhost:5173/"
+          success: "https://adoptree.vercel.app/",
+          failure: "https://adoptree.vercel.app/",
+          pending: "https://adoptree.vercel.app/"
         },
         notification_url: "https://adoptree.loca.lt/payments/webhook",
         auto_return: "approved"
