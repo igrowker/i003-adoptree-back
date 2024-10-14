@@ -1,9 +1,22 @@
 import { PrismaClient, StatusTreeEnum, EstadoDeEnvioEnum, RoleEnum } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
-async function main() {
+export async function seederOnDb() {
+  console.log('Verificando si el seeder ya fue ejecutado...');
+
+  // Verificar si el usuario 'admin@example.com' ya existe
+  const existingAdmin = await prisma.user.findUnique({
+		where: { email: 'admin@example.com' },
+  });
+
+  if (existingAdmin) {
+		console.log(
+			'El seeder ya fue ejecutado anteriormente. No se realizarán cambios.'
+		);
+		return; // Detener la ejecución del seeder si ya existe el usuario
+  }
   console.log('Iniciando seed...');
 
   // Primero elimina las cosechas y árboles que dependen de los usuarios
@@ -141,11 +154,3 @@ console.log('Fincas y Productores creados:', fincasWithProductores);
   console.log('Seed completado exitosamente.');
 }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
