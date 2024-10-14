@@ -1,25 +1,22 @@
 import { Module } from '@nestjs/common';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
-import { PrometheusController } from './metrics.controller';
 import {
 	httpRequestCounterProvider,
 	httpRequestDurationHistogramProvider,
 } from './injector/metrics.injector';
 import { MetricsService } from './metrics.service';
+import { PrometheusControllers } from './metrics.controller';
 
 @Module({
 	imports: [
 		PrometheusModule.register({
-			defaultMetrics: {
-				enabled: true,
-			},
+			controller: PrometheusControllers,
 		}),
 	],
-	controllers: [PrometheusController],
 	providers: [
 		MetricsService,
-		httpRequestDurationHistogramProvider,
 		httpRequestCounterProvider,
+		httpRequestDurationHistogramProvider,
 	],
 	exports: [MetricsService],
 })
