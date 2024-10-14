@@ -7,7 +7,7 @@ import { io } from "../../main";
 
 
 
-// APP_USR-341628833607988-092515-ad00b538d3678e4da26563c2047b3d6a-2007985284
+
 @Injectable()
 export class PaymentsService {
   private client : mercadopago.MercadoPagoConfig;
