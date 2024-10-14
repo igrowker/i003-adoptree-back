@@ -5,7 +5,7 @@ import { Server as HttpServer } from "http";
 export const initializeSocket = (httpServer: HttpServer) => {
     const io = new Server(httpServer, {
         cors: {
-            origin: "http://localhost:5173",  // Ajusta la URL a la del frontend
+            origin: process.env.FRONT_URL,  // Ajusta la URL a la del frontend
             methods: ["GET", "POST"],
             credentials: true
         }
