@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma, StatusTreeEnum, EstadoDeEnvioEnum, RoleEnum } from '@prisma/client';
+import { PrismaClient, StatusTreeEnum, EstadoDeEnvioEnum, RoleEnum } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
