@@ -48,7 +48,7 @@ export class PaymentsService {
 				failure: process.env.FRONT_URL,
 				pending: process.env.FRONT_URL,
 			},
-			notification_url: process.env.FRONT_URL,
+			notification_url: process.env.MP_WEBHOOK,
 			auto_return: 'approved',
 		};
       const result = await this.preference.create({ body })
