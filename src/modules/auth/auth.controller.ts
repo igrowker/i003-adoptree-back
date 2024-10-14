@@ -1,7 +1,13 @@
-import { Body, Controller, Post, UnauthorizedException } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { AuthService } from "./auth.service";
-import { IsPublicResource } from "./decorators";
+import { GetAuthPayload, IsPublicResource } from "./decorators";
 import { LoginDto } from "./dto/login.dto";
 import { RegisterDto } from "./dto/register.dto";
 import { GoogleAuthService } from "./google-auth.service";
@@ -39,5 +45,10 @@ export class AuthController {
     } catch {
       throw new UnauthorizedException("Failed to authenticate with Google");
     }
+  }
+
+  @Get("profile")
+  profile(@GetAuthPayload("email") loggedUserEmail: string) {
+    return this.authService.getAuthPayloadByEmail(loggedUserEmail);
   }
 }
