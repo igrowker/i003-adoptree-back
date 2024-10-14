@@ -76,10 +76,11 @@ export class AuthService {
 
   async getAuthPayloadByEmail(email: string): Promise<AuthPayloadDTO | null> {
     // 1. Buscar el ususario.
-    const user = await this.usersService.findOneByEmail(email);
+    const userdb = await this.usersService.findOneByEmail(email);
     // 2. Si el usuario existe, crear token y devolver GqlAuthPayload.
-    if (user) {
-      return this.createToken(user);
+    if (userdb) {
+      const { user, token } = await this.createToken(userdb);
+      return {...user, token};
     }
     // 3. Si el usuario no existe, devolver null.
     return null;
