@@ -8,7 +8,7 @@ import { GoogleAuthService } from './google-auth.service';
 
 const authConfig = {
   google: {
-    clientId: process.env.GOOGLE_CLIENT_ID || '320850219602-da35nosbb61qld5h0n2t254usmq207ia.apps.googleusercontent.com',
+    clientId: process.env.GOOGLE_CLIENT_ID,
   },
 };
 
