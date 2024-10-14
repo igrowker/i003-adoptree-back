@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, OnModuleInit } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { JwtModule } from "@nestjs/jwt";
@@ -19,48 +19,62 @@ import { UsersModule } from "./modules/users/users.module";
 import { ShippingAddressModule } from "./modules/shipping-address/shipping-address.module";
 import { AdoptionModule } from "./modules/adoption/adoption.module";
 import { ProductorModule } from "./modules/productor/productor.module";
-
+import { seederOnDb, prisma } from "./seed";
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [AuthConfig],
-      validationSchema: Joi.object({
-        ...AuthEnvSchema,
-        // ... otras variables de entorno que puedas tener
-      }),
-    }),
-    PrismaModule.forRoot({
-      isGlobal: true,
-      prismaServiceOptions: {
-        prismaOptions: {
-          log: [{ emit: "event", level: "query" }],
-        },
-      },
-    }),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: "60m" },
-    }),
-    UsersModule,
-    AuthModule,
-    ArbolModule,
-    FincaModule,
-    CosechaModule,
-    PrometheusCustomModule,
-    ShippingAddressModule,
-    AdoptionModule,
-    ProductorModule
-  ],
-  controllers: [AppController, PaymentsController],
-  providers: [
-    AppService,
-    PaymentsService,
-    // Interceptor para prometheus
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: MetricsInterceptor,
-    },
-  ],
+	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true,
+			load: [AuthConfig],
+			validationSchema: Joi.object({
+				...AuthEnvSchema,
+				// ... otras variables de entorno que puedas tener
+			}),
+		}),
+		PrismaModule.forRoot({
+			isGlobal: true,
+			prismaServiceOptions: {
+				prismaOptions: {
+					log: [{ emit: 'event', level: 'query' }],
+				},
+			},
+		}),
+		JwtModule.register({
+			secret: process.env.JWT_SECRET,
+			signOptions: { expiresIn: '60m' },
+		}),
+		UsersModule,
+		AuthModule,
+		ArbolModule,
+		FincaModule,
+		CosechaModule,
+		PrometheusCustomModule,
+		ShippingAddressModule,
+		AdoptionModule,
+		ProductorModule,
+	],
+	controllers: [AppController, PaymentsController],
+	providers: [
+		AppService,
+		PaymentsService,
+		// Interceptor para prometheus
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: MetricsInterceptor,
+		},
+	],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+  
+  async onModuleInit() {
+      try {
+      try {
+        return await seederOnDb();
+      } catch (e) {
+        console.error(e);
+        process.exit(1);
+      }
+    } finally {
+      await prisma.$disconnect();
+    }
+  }
+}
