@@ -39,7 +39,7 @@ export class ArbolController {
   @Patch(":id")
   async update(
     @Param("id") id: number,
-    @Body() updateArbolDto: UpdateArbolDto
+    @Body() updateArbolDto: UpdateArbolDto,
   ): Promise<Arbol> {
     return this.arbolService.update(Number(id), updateArbolDto);
   }
@@ -52,7 +52,9 @@ export class ArbolController {
 
   //Obtener estado de un arbol por id
   @Get("estado-arbol/:id")
-  async findStatusTreeById(@Param("id") id: string): Promise<{id: number, statusTree: string, images : string[] } | null> {
+  async findStatusTreeById(
+    @Param("id") id: string,
+  ): Promise<{ id: number; statusTree: string; images: string[] } | null> {
     return this.arbolService.findStatusTreeById(Number(id));
   }
 }

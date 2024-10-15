@@ -16,7 +16,7 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
-    private readonly passwordService: PasswordService
+    private readonly passwordService: PasswordService,
   ) {}
 
   async register(input: RegisterDto) {
@@ -40,7 +40,7 @@ export class AuthService {
     const { email, password } = loginDto;
     const user = await this.passwordService.validateOrThrowException(
       email,
-      password
+      password,
     );
 
     return this.createToken(user);
@@ -61,7 +61,7 @@ export class AuthService {
 
   async updateProfile(
     input: UpdateUserDto,
-    email: string
+    email: string,
   ): Promise<LoginResponse> {
     const user = await this.usersService.findOneByEmail(email);
 
@@ -80,7 +80,7 @@ export class AuthService {
     // 2. Si el usuario existe, crear token y devolver GqlAuthPayload.
     if (userdb) {
       const { user, token } = await this.createToken(userdb);
-      return {...user, token};
+      return { ...user, token };
     }
     // 3. Si el usuario no existe, devolver null.
     return null;

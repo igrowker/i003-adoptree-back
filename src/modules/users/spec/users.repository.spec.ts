@@ -142,21 +142,28 @@ describe("UsersRepository", () => {
     it("should create an adoption record", async () => {
       const userId = 1;
       const treeId = 2;
-      const shippingAddressId =1;
+      const shippingAddressId = 1;
       const result: Adoption = {
         userId,
         treeId,
         purchaseDate: new Date(),
         shippingAddressId,
         id: 0,
-        status: "PENDING"
+        status: "PENDING",
       };
 
       mockPrismaService.adoption.create.mockResolvedValue(result);
 
-      expect(await usersRepository.buyTreeUser(userId, treeId, shippingAddressId)).toEqual(result);
+      expect(
+        await usersRepository.buyTreeUser(userId, treeId, shippingAddressId),
+      ).toEqual(result);
       expect(mockPrismaService.adoption.create).toHaveBeenCalledWith({
-        data: { userId, treeId, shippingAddressId, purchaseDate: expect.any(Date) },
+        data: {
+          userId,
+          treeId,
+          shippingAddressId,
+          purchaseDate: expect.any(Date),
+        },
       });
     });
   });

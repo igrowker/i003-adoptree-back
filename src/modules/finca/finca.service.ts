@@ -8,12 +8,12 @@ import { ProductorRepository } from "../productor/productor.repository";
 export class FincaService {
   constructor(
     private readonly fincaRepository: FincaRepository,
-    private readonly productorRepository: ProductorRepository
+    private readonly productorRepository: ProductorRepository,
   ) {}
 
   async createFinca(createFincaDto: CreateFincaDto) {
     const { productor, ...fincaData } = createFincaDto;
-    
+
     const createdFinca = await this.fincaRepository.createFinca(fincaData);
 
     if (productor) {
@@ -28,13 +28,17 @@ export class FincaService {
 
   async updateFinca(id: number, updateFincaDto: UpdateFincaDto) {
     const { productor, ...fincaData } = updateFincaDto;
-    
+
     const updatedFinca = await this.fincaRepository.updateFinca(id, fincaData);
 
     if (productor) {
-      const existingProductor = await this.productorRepository.findProductorByFincaId(id);
+      const existingProductor =
+        await this.productorRepository.findProductorByFincaId(id);
       if (existingProductor) {
-        await this.productorRepository.updateProductor(existingProductor.id, productor);
+        await this.productorRepository.updateProductor(
+          existingProductor.id,
+          productor,
+        );
       } else {
         await this.productorRepository.createProductor({
           ...productor,

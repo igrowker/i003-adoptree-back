@@ -9,13 +9,7 @@ export class MetricsService {
 		private readonly httpRequestCounter: Counter<string>,
 		@InjectMetric('http_request_duration_seconds')
 		private readonly httpRequestDurationHistogram: Histogram<string>
-	) {
-		// Log para verificar que las métricas se inician
-		console.log('Metrics initialized:', {
-			httpRequestCounter: this.httpRequestCounter,
-			httpRequestDurationHistogram: this.httpRequestDurationHistogram,
-		});
-	}
+	) {}
 	logg = new Logger('MetricsService');
 
 	// Metodo para incrementar el contador de solicitudes HTTP

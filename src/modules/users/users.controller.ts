@@ -38,7 +38,7 @@ export class UsersController {
   async buyTree(
     @GetAuthPayload("id") userId: number,
     @Param("treeId") treeId: number,
-    @Body("shippingAddressId") shippingAddressId: number
+    @Body("shippingAddressId") shippingAddressId: number,
   ) {
     await this.userService.buyOneTree(userId, treeId, shippingAddressId);
     return { message: "La adopción fue exitosa!" };

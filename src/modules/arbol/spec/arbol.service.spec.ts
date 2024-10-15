@@ -49,8 +49,8 @@ describe("ArbolService", () => {
       const result: Arbol = {
         id: 1,
         active: true,
-        ...createArbolDto
-      }; 
+        ...createArbolDto,
+      };
       mockArbolRepository.create.mockResolvedValue(result);
       expect(await service.createArbol(createArbolDto)).toEqual(result);
       expect(mockArbolRepository.create).toHaveBeenCalledWith(createArbolDto);
@@ -68,7 +68,7 @@ describe("ArbolService", () => {
           userId: 0,
           images: [],
           active: false,
-          price: ""
+          price: "",
         },
         {
           id: 2,
@@ -78,7 +78,7 @@ describe("ArbolService", () => {
           userId: 0,
           images: [],
           active: true,
-          price: ""
+          price: "",
         },
       ];
 
@@ -97,9 +97,9 @@ describe("ArbolService", () => {
         statusTree: "SEMILLA",
         fincaId: 0,
         userId: 0,
-        images:[],
+        images: [],
         active: true,
-        price: ""
+        price: "",
       };
       const id = 1;
 
@@ -119,9 +119,9 @@ describe("ArbolService", () => {
         statusTree: "SEMILLA",
         fincaId: 0,
         userId: 0,
-        images:[],
+        images: [],
         active: true,
-        price: ""
+        price: "",
       };
       const id = 1;
 
@@ -130,7 +130,7 @@ describe("ArbolService", () => {
       expect(await service.update(id, updateArbolDto)).toEqual(result);
       expect(mockArbolRepository.update).toHaveBeenCalledWith(
         id,
-        updateArbolDto
+        updateArbolDto,
       );
     });
   });
@@ -143,9 +143,9 @@ describe("ArbolService", () => {
         statusTree: "SEMILLA",
         fincaId: 0,
         userId: 0,
-        images:[],
+        images: [],
         active: true,
-        price: ""
+        price: "",
       };
       const id = 1;
 

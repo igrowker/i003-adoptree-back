@@ -1,7 +1,7 @@
 import * as Joi from "joi";
-import { registerAs } from '@nestjs/config';
+import { registerAs } from "@nestjs/config";
 
-export const AUTH_CONFIG_KEY = 'auth';
+export const AUTH_CONFIG_KEY = "auth";
 
 export const AuthEnvSchema = {
   JWT_SECRET: Joi.string().required(),

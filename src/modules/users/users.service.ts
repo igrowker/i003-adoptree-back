@@ -15,7 +15,7 @@ export class UsersService {
   constructor(
     @Inject(forwardRef(() => PasswordService))
     private readonly passwordService: PasswordService,
-    private readonly usersRepo: UsersRepository
+    private readonly usersRepo: UsersRepository,
   ) {}
 
   async findOneByEmail(email: string): Promise<User> {
@@ -55,7 +55,7 @@ export class UsersService {
   async buyOneTree(
     userId: number,
     treeId: number,
-    shippingAddressId: number
+    shippingAddressId: number,
   ): Promise<void> {
     await this.usersRepo.buyTreeUser(userId, treeId, shippingAddressId);
   }

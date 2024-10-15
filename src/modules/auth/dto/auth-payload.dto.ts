@@ -15,8 +15,7 @@ export class AuthPayloadDTO {
   role: RoleEnum;
 }
 
-
-export class LoginResponse { 
+export class LoginResponse {
   user: User;
-  token: string
+  token: string;
 }
