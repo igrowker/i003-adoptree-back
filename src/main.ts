@@ -3,15 +3,15 @@ import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { PrismaService } from "nestjs-prisma";
 import { AppModule } from "./app.module";
-import { initializeSocket } from './socket';
+import { initializeSocket } from "./socket";
 
 // Exportamos la variable io
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export let io: any;  // Declarar la variable io para que sea exportada
+export let io: any; // Declarar la variable io para que sea exportada
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   const httpServer = app.getHttpServer();
 
   // Inicializamos Socket.IO y lo asignamos a la variable exportada
@@ -25,11 +25,11 @@ async function bootstrap() {
       params.forEach((param, index) => {
         queryString = queryString.replace(
           `$${index + 1}`,
-          typeof param === "string" ? `'${param}'` : String(param)
+          typeof param === "string" ? `'${param}'` : String(param),
         );
       });
       console.log(
-        `[${e.timestamp}] Query: ${queryString} Duration: ${e.duration}ms \n`
+        `[${e.timestamp}] Query: ${queryString} Duration: ${e.duration}ms \n`,
       );
     });
   }

@@ -1,12 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { Adoption} from '@prisma/client'; // Importa los tipos de Prisma para usar en los DTO si es necesario
-import { PrismaService } from 'nestjs-prisma'; // Usar el PrismaService de nestjs-prisma
+import { Injectable } from "@nestjs/common";
+import { Adoption } from "@prisma/client"; // Importa los tipos de Prisma para usar en los DTO si es necesario
+import { PrismaService } from "nestjs-prisma"; // Usar el PrismaService de nestjs-prisma
 
 @Injectable()
 export class AdoptionService {
   constructor(private prisma: PrismaService) {}
 
-  async createAdoption(userId: number, treeId: number, shippingAddressId: number) {
+  async createAdoption(
+    userId: number,
+    treeId: number,
+    shippingAddressId: number,
+  ) {
     return this.prisma.adoption.create({
       data: {
         userId,
@@ -24,7 +28,7 @@ export class AdoptionService {
 
   async getPendingAdoptions() {
     return this.prisma.adoption.findMany({
-      where: { status: 'PENDING' },
+      where: { status: "PENDING" },
       include: {
         user: true,
         tree: true,
@@ -33,7 +37,6 @@ export class AdoptionService {
     });
   }
 
-
   async findOneByUserId(userId: number): Promise<Adoption | null> {
     try {
       // Busca el árbol asociado al userId. Ajusta la lógica según tu modelo de datos.
@@ -41,13 +44,13 @@ export class AdoptionService {
         where: { userId },
         include: {
           user: true,
-          tree: true
-        }
+          tree: true,
+        },
       });
       return adoption || null; // Devuelve el árbol o null si no se encuentra
     } catch (error) {
-      console.error('Error fetching arbol by userId:', error);
-      throw new Error('Error al obtener el árbol.'); // Maneja el error según tus necesidades
+      console.error("Error fetching arbol by userId:", error);
+      throw new Error("Error al obtener el árbol."); // Maneja el error según tus necesidades
     }
   }
 }

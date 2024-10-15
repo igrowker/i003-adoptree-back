@@ -92,7 +92,7 @@ describe("AuthController", () => {
 
       expect(result).toEqual({ token, user });
       expect(mockGoogleAuthService.validateUser).toHaveBeenCalledWith(
-        credential
+        credential,
       );
       expect(mockJwtService.sign).toHaveBeenCalledWith(payload);
     });
@@ -101,11 +101,11 @@ describe("AuthController", () => {
       const credential = "invalid-credential";
 
       mockGoogleAuthService.validateUser.mockRejectedValue(
-        new Error("Validation failed")
+        new Error("Validation failed"),
       );
 
       await expect(authController.googleLogin(credential)).rejects.toThrow(
-        UnauthorizedException
+        UnauthorizedException,
       );
     });
   });

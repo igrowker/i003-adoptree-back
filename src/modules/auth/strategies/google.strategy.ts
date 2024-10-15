@@ -14,7 +14,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
   constructor(
     @Inject(AuthConfig.KEY)
     private authConfig: ConfigType<typeof AuthConfig>,
-    private readonly usersService: UsersService // Inyecta tu servicio de usuarios
+    private readonly usersService: UsersService, // Inyecta tu servicio de usuarios
   ) {
     super({
       clientID: authConfig.google.clientId,
@@ -42,7 +42,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
     req: Request,
     accessToken: string,
     refreshToken: string,
-    profile: Profile
+    profile: Profile,
   ) {
     const {
       name,

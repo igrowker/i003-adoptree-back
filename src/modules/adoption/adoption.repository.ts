@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'nestjs-prisma';
-import { Adoption } from '@prisma/client';
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "nestjs-prisma";
+import { Adoption } from "@prisma/client";
 
 @Injectable()
 export class AdoptionRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: Omit<Adoption, 'id'>): Promise<Adoption> {
+  async create(data: Omit<Adoption, "id">): Promise<Adoption> {
     return this.prisma.adoption.create({
       data,
     });
@@ -14,7 +14,7 @@ export class AdoptionRepository {
 
   async findPendingAdoptions(): Promise<Adoption[]> {
     return this.prisma.adoption.findMany({
-      where: { status: 'PENDING' },
+      where: { status: "PENDING" },
       include: {
         user: true,
         tree: true,
@@ -27,7 +27,7 @@ export class AdoptionRepository {
     return this.prisma.adoption.findUnique({
       where: { id },
       include: {
-        user: true,  // Incluye relaciones si es necesario
+        user: true, // Incluye relaciones si es necesario
         tree: true,
         shippingAddress: true,
       },

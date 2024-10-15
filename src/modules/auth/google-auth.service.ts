@@ -20,7 +20,7 @@ export class GoogleAuthService {
 
   constructor(
     private usersService: UsersService,
-    @Inject("AUTH_CONFIG") private authConfig: AuthConfig
+    @Inject("AUTH_CONFIG") private authConfig: AuthConfig,
   ) {
     this.client = new OAuth2Client(this.authConfig.google.clientId);
   }

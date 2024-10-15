@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "nestjs-prisma";
-import { Prisma} from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 interface FincaCreateRepoInput {
   name: string;
@@ -69,26 +69,24 @@ export class FincaRepository {
         practicesSustainable: input.practicesSustainable,
         ubication: input.ubication,
         images: input.images,
-        productor: input.productor
-          ? { create: input.productor }
-          : undefined,
+        productor: input.productor ? { create: input.productor } : undefined,
       },
     });
   }
 
   async updateFinca(
     id: number,
-    input: FincaUpdateRepoInput
+    input: FincaUpdateRepoInput,
   ): Promise<FincaRepo> {
     const existingFinca = await this.prisma.finca.findUnique({
       where: { id },
       include: { productor: true },
     });
-  
+
     if (!existingFinca) {
       throw new NotFoundException(`Finca with ID ${id} not found.`);
     }
-  
+
     let productorData;
     if (input.productor) {
       if (existingFinca.productor) {
@@ -96,12 +94,14 @@ export class FincaRepository {
       } else {
         const { nombre, apellido, telefono } = input.productor;
         if (!nombre || !apellido || !telefono) {
-          throw new Error("Los campos 'nombre', 'apellido' y 'telefono' son obligatorios para crear un nuevo productor.");
+          throw new Error(
+            "Los campos 'nombre', 'apellido' y 'telefono' son obligatorios para crear un nuevo productor.",
+          );
         }
         productorData = { create: input.productor };
       }
     }
-  
+
     return this.prisma.finca.update({
       include: FincaRepository.commonIncludes,
       where: { id },

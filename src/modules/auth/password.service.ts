@@ -16,12 +16,12 @@ export class PasswordService {
 
   constructor(
     @Inject(forwardRef(() => UsersService))
-    private readonly userService: UsersService
+    private readonly userService: UsersService,
   ) {}
 
   async validateOrThrowException(
     email: string,
-    password: string
+    password: string,
   ): Promise<User> {
     try {
       const user = await this.userService.findOneByEmail(email);

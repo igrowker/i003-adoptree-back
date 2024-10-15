@@ -35,7 +35,7 @@ export class FincaController {
   @Put(":id")
   async updateFinca(
     @Param("id") id: number,
-    @Body() updateFincaDto: UpdateFincaDto
+    @Body() updateFincaDto: UpdateFincaDto,
   ): Promise<Finca> {
     return this.fincaService.updateFinca(Number(id), updateFincaDto);
   }

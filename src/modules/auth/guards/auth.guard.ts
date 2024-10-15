@@ -17,13 +17,13 @@ import { AuthPayloadDTO } from "../dto/auth-payload.dto";
 export default class AuthGuard implements CanActivate {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly reflector: Reflector
+    private readonly reflector: Reflector,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const isPublicResource = this.reflector.get<boolean>(
       COMMON_KEYS.DECORATOR_IS_PUBLIC,
-      context.getHandler()
+      context.getHandler(),
     );
 
     if (isPublicResource) {
@@ -55,7 +55,7 @@ export default class AuthGuard implements CanActivate {
 
     const roles = this.reflector.get<RoleEnum[]>(
       COMMON_KEYS.DECORATOR_ROLE_CHECK,
-      context.getHandler()
+      context.getHandler(),
     );
 
     if (roles && roles.length > 0) {

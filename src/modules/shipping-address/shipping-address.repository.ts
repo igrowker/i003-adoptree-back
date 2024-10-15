@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'nestjs-prisma';
-import { ShippingAddress } from '@prisma/client';
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "nestjs-prisma";
+import { ShippingAddress } from "@prisma/client";
 
 @Injectable()
 export class ShippingAddressRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: Omit<ShippingAddress, 'id'>): Promise<ShippingAddress> {
+  async create(data: Omit<ShippingAddress, "id">): Promise<ShippingAddress> {
     return this.prisma.shippingAddress.create({
       data: {
         fullName: data.fullName, // Usa el fullName del DTO
@@ -24,7 +24,6 @@ export class ShippingAddressRepository {
       },
     });
   }
-  
 
   async findOne(id: number): Promise<ShippingAddress | null> {
     return this.prisma.shippingAddress.findUnique({ where: { id } });
@@ -34,7 +33,10 @@ export class ShippingAddressRepository {
     return this.prisma.shippingAddress.findMany({ where: { userId } });
   }
 
-  async update(id: number, data: Partial<ShippingAddress>): Promise<ShippingAddress> {
+  async update(
+    id: number,
+    data: Partial<ShippingAddress>,
+  ): Promise<ShippingAddress> {
     return this.prisma.shippingAddress.update({ where: { id }, data });
   }
 

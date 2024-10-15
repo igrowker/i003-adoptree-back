@@ -22,12 +22,12 @@ type AuthUserKeys = DotNestedKeys<AuthPayloadDTO>;
 export const GetAuthPayload = createParamDecorator(
   (
     authUserKey: AuthUserKeys,
-    context: ExecutionContext
+    context: ExecutionContext,
   ): AuthPayloadDTO | null => {
     const { req } = getReqResFromCtx(context);
 
     const authUser: AuthPayloadDTO = req.user;
 
     return authUserKey ? _get(authUser, authUserKey) : authUser;
-  }
+  },
 );
