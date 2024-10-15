@@ -6,6 +6,7 @@ import {
   httpRequestDurationHistogramProvider,
 } from "./injector/metrics.injector";
 import { MetricsService } from "./metrics.service";
+import { PrometheusControllers } from './metrics.controller';
 
 @Module({
   imports: [
