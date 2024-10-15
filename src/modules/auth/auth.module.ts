@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from '../users/users.module';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { PasswordService } from './password.service';
-import { GoogleAuthService } from './google-auth.service';
+import { Module } from "@nestjs/common";
+import { JwtModule } from "@nestjs/jwt";
+import { UsersModule } from "../users/users.module";
+import { AuthController } from "./auth.controller";
+import { AuthService } from "./auth.service";
+import { PasswordService } from "./password.service";
+import { GoogleAuthService } from "./google-auth.service";
 
 const authConfig = {
   google: {
@@ -18,7 +18,7 @@ const authConfig = {
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60d' },
+      signOptions: { expiresIn: "60d" },
     }),
   ],
   controllers: [AuthController],
@@ -27,7 +27,7 @@ const authConfig = {
     PasswordService,
     GoogleAuthService,
     {
-      provide: 'AUTH_CONFIG',
+      provide: "AUTH_CONFIG",
       useValue: authConfig, // Proveedor que define la configuración de AUTH_CONFIG
     },
   ],

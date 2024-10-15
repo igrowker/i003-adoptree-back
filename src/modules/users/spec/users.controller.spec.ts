@@ -43,7 +43,7 @@ describe("UsersController", () => {
       mockUsersService.create.mockResolvedValue(createUserDto);
 
       expect(await usersController.createUser(createUserDto)).toEqual(
-        createUserDto
+        createUserDto,
       );
       expect(mockUsersService.create).toHaveBeenCalledWith(createUserDto);
     });
@@ -86,10 +86,10 @@ describe("UsersController", () => {
 
       await usersController.buyTree(userId, treeId, shippingAddressId);
       expect(mockUsersService.buyOneTree).toHaveBeenCalledWith(
-			userId,
-			treeId,
-			shippingAddressId
-		);
+        userId,
+        treeId,
+        shippingAddressId,
+      );
     });
   });
 });

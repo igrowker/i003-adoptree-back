@@ -82,14 +82,14 @@ describe("AuthService", () => {
       };
 
       mockUsersService.create.mockRejectedValue(
-        new Error(DUPLICATE_ERROR_CODE)
+        new Error(DUPLICATE_ERROR_CODE),
       );
 
       await expect(authService.register(registerDto)).rejects.toThrow(
-        BadRequestException
+        BadRequestException,
       );
       await expect(authService.register(registerDto)).rejects.toThrow(
-        ERROR_KEYS.AUTH_EMAIL_IN_USE
+        ERROR_KEYS.AUTH_EMAIL_IN_USE,
       );
     });
   });
@@ -110,7 +110,7 @@ describe("AuthService", () => {
       expect(result).toEqual({ user, token: "token" });
       expect(mockPasswordService.validateOrThrowException).toHaveBeenCalledWith(
         loginDto.email,
-        loginDto.password
+        loginDto.password,
       );
       expect(mockJwtService.signAsync).toHaveBeenCalledWith({
         id: user.id,
@@ -153,10 +153,10 @@ describe("AuthService", () => {
       mockUsersService.findOneByEmail.mockResolvedValue(null);
 
       await expect(authService.updateProfile(updateDto, email)).rejects.toThrow(
-        BadRequestException
+        BadRequestException,
       );
       await expect(authService.updateProfile(updateDto, email)).rejects.toThrow(
-        ERROR_KEYS.AUTH_USER_NOT_FOUND
+        ERROR_KEYS.AUTH_USER_NOT_FOUND,
       );
     });
   });

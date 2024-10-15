@@ -38,8 +38,7 @@ describe("PasswordService", () => {
         password: await bcrypt.hash(password, 10),
         role: RoleEnum.USER,
         name: "",
- 
-   
+
         googleId: "1",
         avatar: "",
       };
@@ -49,7 +48,7 @@ describe("PasswordService", () => {
 
       const result = await passwordService.validateOrThrowException(
         email,
-        password
+        password,
       );
 
       expect(result).toEqual(user);
@@ -64,7 +63,7 @@ describe("PasswordService", () => {
       mockUserService.findOneByEmail.mockResolvedValue(null);
 
       await expect(
-        passwordService.validateOrThrowException(email, password)
+        passwordService.validateOrThrowException(email, password),
       ).rejects.toThrow(ForbiddenException);
     });
 
@@ -85,7 +84,7 @@ describe("PasswordService", () => {
       (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
       await expect(
-        passwordService.validateOrThrowException(email, password)
+        passwordService.validateOrThrowException(email, password),
       ).rejects.toThrow(ForbiddenException);
     });
   });

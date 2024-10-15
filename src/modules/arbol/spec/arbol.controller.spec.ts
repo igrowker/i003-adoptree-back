@@ -43,7 +43,7 @@ describe("ArbolController", () => {
         userId: 1,
         statusTree: "SEMILLA",
         images: [],
-        price: ""
+        price: "",
       };
       const result: Arbol = { id: 1, ...createArbolDto, active: true };
 
@@ -65,7 +65,7 @@ describe("ArbolController", () => {
           userId: 1,
           active: true,
           images: [],
-          price: ""
+          price: "",
         },
         {
           id: 2,
@@ -75,7 +75,7 @@ describe("ArbolController", () => {
           userId: 2,
           active: true,
           images: [],
-          price: ""
+          price: "",
         },
       ];
 
@@ -95,8 +95,8 @@ describe("ArbolController", () => {
         fincaId: 1,
         userId: 1,
         active: true,
-        images:[],
-        price:""
+        images: [],
+        price: "",
       };
       const id = "1";
 
@@ -118,8 +118,8 @@ describe("ArbolController", () => {
         fincaId: 1,
         userId: 1,
         active: true,
-        images:[],
-        price: ""
+        images: [],
+        price: "",
       };
       const id = 1;
 
@@ -139,8 +139,8 @@ describe("ArbolController", () => {
         fincaId: 1,
         userId: 1,
         active: true,
-        images:[],
-        price: ""
+        images: [],
+        price: "",
       };
       const id = 1;
 
@@ -160,7 +160,7 @@ describe("ArbolController", () => {
 
       expect(await controller.findStatusTreeById(id)).toEqual(result);
       expect(mockArbolService.findStatusTreeById).toHaveBeenCalledWith(
-        Number(id)
+        Number(id),
       );
     });
   });

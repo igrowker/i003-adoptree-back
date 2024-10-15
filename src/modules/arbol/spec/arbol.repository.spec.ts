@@ -39,7 +39,7 @@ describe("ArbolRepository", () => {
         userId: 1,
         statusTree: StatusTreeEnum.SEMILLA,
         images: [],
-        price: ""
+        price: "",
       };
 
       const result: Arbol = { id: 1, ...input, active: true };
@@ -69,9 +69,9 @@ describe("ArbolRepository", () => {
           statusTree: StatusTreeEnum.ARBOLITO,
           fincaId: 1,
           userId: 1,
-          images:[],
+          images: [],
           active: true,
-          price: ""
+          price: "",
         },
         {
           id: 2,
@@ -79,9 +79,9 @@ describe("ArbolRepository", () => {
           statusTree: StatusTreeEnum.ARBOLITO,
           fincaId: 2,
           userId: 2,
-          images:[],
+          images: [],
           active: true,
-          price: ""
+          price: "",
         },
       ];
 
@@ -103,9 +103,9 @@ describe("ArbolRepository", () => {
         statusTree: StatusTreeEnum.ARBOLITO,
         fincaId: 1,
         userId: 1,
-        images:[],
+        images: [],
         active: true,
-        price: ""
+        price: "",
       };
       const id = 1;
 
@@ -125,9 +125,9 @@ describe("ArbolRepository", () => {
         type: "Roble",
         fincaId: 1,
         userId: 1,
-        images:[],
+        images: [],
         statusTree: StatusTreeEnum.ARBOLITO,
-        price: ""
+        price: "",
       };
       const result: Arbol = { id: 1, ...input, active: true };
       const id = 1;
@@ -136,16 +136,16 @@ describe("ArbolRepository", () => {
 
       expect(await repository.update(id, input)).toEqual(result);
       expect(mockPrismaService.arbol.update).toHaveBeenCalledWith({
-			include: expect.any(Object),
-			where: { id: id },
-			data: {
-				statusTree: input.statusTree,
-				finca: { connect: { id: input.fincaId } },
-				type: input.type,
-				user: { connect: { id: input.userId } },
-				price: input.price, // Se agrega el campo price
-			},
-		});
+        include: expect.any(Object),
+        where: { id: id },
+        data: {
+          statusTree: input.statusTree,
+          finca: { connect: { id: input.fincaId } },
+          type: input.type,
+          user: { connect: { id: input.userId } },
+          price: input.price, // Se agrega el campo price
+        },
+      });
     });
   });
 
@@ -158,8 +158,8 @@ describe("ArbolRepository", () => {
         fincaId: 1,
         userId: 1,
         active: true,
-        images:[], 
-        price: ""
+        images: [],
+        price: "",
       };
       const id = 1;
 
@@ -185,7 +185,7 @@ describe("ArbolRepository", () => {
         select: {
           id: true,
           statusTree: true,
-          images: true
+          images: true,
         },
       });
     });

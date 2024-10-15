@@ -34,7 +34,7 @@ interface ArbolCreateRepoInput {
   userId: number;
   statusTree: StatusTreeEnum;
   images: string[];
-  price: string
+  price: string;
 }
 
 interface ArbolUpdateRepoInput {
@@ -63,7 +63,7 @@ export class ArbolRepository {
         name: true,
         ubication: true,
         practicesSustainable: true,
-        productor: true
+        productor: true,
       },
     },
     user: {
@@ -149,7 +149,7 @@ export class ArbolRepository {
         type: input.type,
         user: { connect: { id: input.userId } },
         active: input?.active,
-        price: input.price
+        price: input.price,
       },
     });
   }
@@ -159,8 +159,8 @@ export class ArbolRepository {
   }
 
   findStatusTreeById(
-    id: number
-  ): Promise<{ id: number; statusTree: string, images : string[] } | null> {
+    id: number,
+  ): Promise<{ id: number; statusTree: string; images: string[] } | null> {
     return this.prisma.arbol.findUnique({
       where: {
         id: id,
@@ -168,7 +168,7 @@ export class ArbolRepository {
       select: {
         id: true,
         statusTree: true,
-        images: true
+        images: true,
       },
     });
   }

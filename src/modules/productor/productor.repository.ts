@@ -39,7 +39,9 @@ export class ProductorRepository {
     finca: true,
   };
 
-  async createProductor(input: ProductorCreateRepoInput): Promise<ProductorRepo> {
+  async createProductor(
+    input: ProductorCreateRepoInput,
+  ): Promise<ProductorRepo> {
     return this.prisma.productor.create({
       include: this.commonIncludes,
       data: input,
@@ -48,7 +50,7 @@ export class ProductorRepository {
 
   async updateProductor(
     id: number,
-    input: ProductorUpdateRepoInput
+    input: ProductorUpdateRepoInput,
   ): Promise<ProductorRepo> {
     return this.prisma.productor.update({
       where: { id },

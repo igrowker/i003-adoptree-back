@@ -26,19 +26,18 @@ export class CosechaController {
 
   @Get()
   findAll(@Query() filter?: FilterCosechaDto): Promise<Cosecha[]> {
-    
     return this.cosechaService.findAll(filter);
   }
 
   @Get(":id")
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<Cosecha | null> {
+  findOne(@Param("id", ParseIntPipe) id: number): Promise<Cosecha | null> {
     return this.cosechaService.findOne(id);
   }
 
   @Put(":id")
   update(
     @Param("id") id: number,
-    @Body() input: UpdateCosechaDto
+    @Body() input: UpdateCosechaDto,
   ): Promise<Cosecha> {
     return this.cosechaService.update(id, input);
   }
